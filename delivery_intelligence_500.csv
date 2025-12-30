@@ -1,0 +1,501 @@
+employee_id,employee_name,department,designation,employment_type,location,experience_years,cost_per_hour,manager_id,project_id,project_name,client_name,project_type,start_date,end_date,planned_hours,billing_rate,work_date,hours_logged,billable,task_type,jira_ticket,ticket_status,priority,story_points,attendance_pct,leave_days,performance_rating
+E002,Neha Verma,Engineering,Developer,Contractor,Pune,4,885,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-17,10,0,Architecture,JIRA-132,To Do,Low,4,87,4,4.2
+E009,Suresh Kumar,Engineering,Developer,Contractor,Pune,8,1806,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-15,2,0,Architecture,JIRA-448,In Progress,Medium,4,90,0,3.2
+E002,Neha Verma,Engineering,Developer,Contractor,Chennai,1,1540,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-24,8,0,Support,JIRA-949,Done,High,4,82,0,4.3
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Bangalore,7,1169,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-24,7,0,Support,JIRA-463,To Do,High,2,99,5,3.3
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Chennai,11,1740,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-30,7,0,Testing,JIRA-941,To Do,High,7,88,0,3.4
+E010,Anita Rao,Engineering,Architect,Contractor,Hyderabad,11,1539,M002,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-14,6,0,Testing,JIRA-862,Done,High,7,98,3,3.7
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Bangalore,2,913,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-01,8,0,Architecture,JIRA-490,Done,Critical,5,97,0,4.4
+E002,Neha Verma,Engineering,Developer,Contractor,Chennai,2,1201,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-18,4,1,Development,JIRA-839,Done,High,3,96,0,4.7
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Pune,6,930,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-08,7,1,Development,JIRA-214,In Progress,High,4,81,1,4.8
+E002,Neha Verma,Engineering,Developer,Contractor,Bangalore,9,857,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-16,9,0,Support,JIRA-640,Done,Critical,4,97,5,4.4
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Hyderabad,9,1524,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-12,5,0,Development,JIRA-446,To Do,Medium,4,80,0,4.4
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Chennai,2,1652,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-05,6,1,Testing,JIRA-652,To Do,Critical,4,95,3,3.4
+E002,Neha Verma,Engineering,Developer,Contractor,Hyderabad,8,710,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-23,2,1,Support,JIRA-919,To Do,Medium,4,86,4,3.9
+E007,Rohan Das,Support,Support Engineer,Contractor,Pune,2,1507,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-18,2,0,Development,JIRA-871,To Do,Medium,7,95,3,3.4
+E007,Rohan Das,Support,Support Engineer,Contractor,Bangalore,7,1143,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-11,6,1,Architecture,JIRA-258,To Do,High,4,81,4,4.5
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Hyderabad,9,1687,M002,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-04,2,0,Testing,JIRA-170,Done,Low,4,92,0,4.9
+E010,Anita Rao,Engineering,Architect,Full-Time,Bangalore,7,1946,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-07,6,0,Support,JIRA-344,In Progress,Critical,3,100,2,3.9
+E002,Neha Verma,Engineering,Developer,Full-Time,Bangalore,9,1036,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-30,4,1,Development,JIRA-350,In Progress,High,3,94,4,4.4
+E010,Anita Rao,Engineering,Architect,Contractor,Bangalore,3,1141,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-01,3,0,Support,JIRA-388,Done,Medium,6,86,5,4.3
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Bangalore,2,1899,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-01,6,0,Development,JIRA-441,To Do,High,3,94,4,4.4
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Pune,9,673,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-08,10,0,Architecture,JIRA-230,To Do,High,6,81,2,3.4
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Pune,4,932,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-23,8,0,Testing,JIRA-854,In Progress,Critical,4,88,1,4.6
+E002,Neha Verma,Engineering,Developer,Full-Time,Hyderabad,4,1008,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-25,7,1,Testing,JIRA-328,To Do,Medium,7,90,2,4.7
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Chennai,1,836,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-11,4,1,Development,JIRA-211,Done,Critical,6,90,3,4.2
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Chennai,1,1493,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-25,10,0,Support,JIRA-541,To Do,High,6,83,5,4.8
+E009,Suresh Kumar,Engineering,Developer,Contractor,Chennai,7,1205,M002,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-12,5,1,Architecture,JIRA-793,Done,Medium,5,92,4,4.7
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Chennai,8,1504,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-14,5,1,Testing,JIRA-774,To Do,High,6,82,1,4.3
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Bangalore,4,1573,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-10,9,1,Testing,JIRA-835,Done,Critical,8,92,1,3.3
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Pune,3,1660,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-19,2,0,Development,JIRA-567,To Do,Critical,6,94,4,4.6
+E009,Suresh Kumar,Engineering,Developer,Contractor,Pune,12,1572,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-23,6,0,Support,JIRA-884,Done,Critical,4,88,3,3.2
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Chennai,9,765,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-18,4,0,Architecture,JIRA-810,To Do,Medium,2,93,3,3.7
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Hyderabad,7,1796,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-04,8,1,Development,JIRA-460,In Progress,Critical,7,97,5,4.5
+E010,Anita Rao,Engineering,Architect,Full-Time,Chennai,7,1594,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-01,8,1,Architecture,JIRA-841,To Do,Critical,3,99,4,3.1
+E007,Rohan Das,Support,Support Engineer,Full-Time,Bangalore,11,1477,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-06,9,0,Development,JIRA-366,In Progress,High,4,94,2,3.7
+E007,Rohan Das,Support,Support Engineer,Contractor,Chennai,2,1563,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-18,10,0,Support,JIRA-329,Done,Low,1,80,1,3.4
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Pune,8,1971,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-10,5,1,Support,JIRA-885,In Progress,Medium,2,85,2,3.2
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Hyderabad,12,1006,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-06,5,0,Support,JIRA-970,Done,Low,1,91,4,3.9
+E006,Kavya Iyer,Engineering,Developer,Contractor,Bangalore,7,1603,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-02,8,1,Architecture,JIRA-824,To Do,Critical,3,96,5,3.5
+E009,Suresh Kumar,Engineering,Developer,Contractor,Chennai,6,1102,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-30,6,1,Testing,JIRA-868,In Progress,Critical,6,80,3,4.7
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Chennai,6,1172,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-14,10,0,Testing,JIRA-187,To Do,Critical,8,97,1,4.4
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Bangalore,5,1053,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-20,5,1,Support,JIRA-584,Done,High,7,97,2,3.7
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Pune,2,994,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-20,3,0,Testing,JIRA-321,Done,Critical,5,98,4,4.2
+E002,Neha Verma,Engineering,Developer,Full-Time,Chennai,3,1219,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-19,10,0,Support,JIRA-146,To Do,High,3,100,3,3.2
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Hyderabad,8,1297,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-19,2,1,Architecture,JIRA-216,To Do,Critical,8,82,4,4.3
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Bangalore,4,842,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-10,5,1,Architecture,JIRA-553,In Progress,Critical,5,98,4,3.1
+E002,Neha Verma,Engineering,Developer,Full-Time,Chennai,11,766,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-10,5,0,Development,JIRA-260,To Do,Critical,8,99,3,3.6
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Hyderabad,2,1078,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-15,5,1,Development,JIRA-657,To Do,Medium,5,84,0,3.1
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Hyderabad,2,1559,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-17,8,1,Architecture,JIRA-548,To Do,Low,7,90,4,3.5
+E002,Neha Verma,Engineering,Developer,Full-Time,Chennai,10,682,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-13,9,1,Support,JIRA-285,Done,Critical,8,82,3,3.7
+E006,Kavya Iyer,Engineering,Developer,Full-Time,Pune,6,1443,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-12,6,1,Development,JIRA-565,To Do,High,5,90,0,4.9
+E007,Rohan Das,Support,Support Engineer,Full-Time,Hyderabad,7,711,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-22,10,1,Architecture,JIRA-740,In Progress,Low,4,88,4,3.3
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Bangalore,1,1890,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-26,4,1,Development,JIRA-665,In Progress,Low,4,83,3,4.9
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Chennai,7,1588,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-29,5,1,Testing,JIRA-492,To Do,Medium,2,88,3,3.7
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Chennai,12,1211,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-22,4,1,Architecture,JIRA-453,In Progress,Critical,8,90,1,5.0
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Hyderabad,1,1251,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-25,8,1,Testing,JIRA-607,To Do,Medium,6,83,3,3.2
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Hyderabad,11,916,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-16,9,1,Support,JIRA-738,Done,Critical,2,90,5,4.7
+E007,Rohan Das,Support,Support Engineer,Contractor,Bangalore,10,740,M002,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-10,6,0,Development,JIRA-544,To Do,Low,8,85,5,3.6
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Chennai,6,1367,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-21,4,0,Architecture,JIRA-679,Done,Medium,3,85,0,4.2
+E007,Rohan Das,Support,Support Engineer,Full-Time,Hyderabad,10,893,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-13,9,1,Architecture,JIRA-361,Done,Low,8,89,5,4.1
+E002,Neha Verma,Engineering,Developer,Contractor,Chennai,11,1468,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-30,9,1,Testing,JIRA-493,In Progress,Low,4,92,4,3.7
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Chennai,1,1759,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-02,9,1,Testing,JIRA-721,In Progress,Medium,4,99,2,4.4
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Chennai,8,668,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-27,4,0,Support,JIRA-434,Done,Critical,3,86,1,4.6
+E006,Kavya Iyer,Engineering,Developer,Contractor,Pune,5,1586,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-02,7,0,Architecture,JIRA-177,To Do,Medium,7,97,2,3.2
+E007,Rohan Das,Support,Support Engineer,Full-Time,Hyderabad,6,1977,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-17,8,1,Development,JIRA-791,To Do,Critical,1,99,4,3.7
+E010,Anita Rao,Engineering,Architect,Full-Time,Hyderabad,12,1218,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-11,3,0,Development,JIRA-138,In Progress,Critical,2,83,1,4.8
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Hyderabad,10,916,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-30,3,1,Architecture,JIRA-386,To Do,High,4,94,3,4.9
+E006,Kavya Iyer,Engineering,Developer,Contractor,Chennai,1,1415,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-13,5,0,Architecture,JIRA-193,Done,Medium,1,81,2,3.5
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Pune,10,1042,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-14,7,0,Development,JIRA-383,To Do,Medium,5,85,0,4.3
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Pune,10,1263,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-01,4,1,Development,JIRA-229,Done,Critical,2,82,3,3.9
+E006,Kavya Iyer,Engineering,Developer,Full-Time,Hyderabad,9,1053,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-07,10,1,Architecture,JIRA-758,To Do,Low,8,92,3,4.4
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Chennai,10,903,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-05,4,1,Support,JIRA-490,Done,High,8,96,4,3.9
+E002,Neha Verma,Engineering,Developer,Full-Time,Hyderabad,8,1067,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-16,7,1,Architecture,JIRA-525,Done,Low,6,93,2,4.3
+E006,Kavya Iyer,Engineering,Developer,Contractor,Bangalore,2,774,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-13,8,0,Support,JIRA-931,To Do,Low,6,83,3,3.7
+E007,Rohan Das,Support,Support Engineer,Contractor,Chennai,2,1783,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-19,4,1,Testing,JIRA-967,To Do,High,6,83,2,4.1
+E007,Rohan Das,Support,Support Engineer,Full-Time,Chennai,1,969,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-19,6,1,Support,JIRA-106,To Do,Medium,7,82,1,4.5
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Hyderabad,7,1529,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-17,4,1,Support,JIRA-838,In Progress,Low,1,84,1,4.5
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Hyderabad,8,1843,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-18,8,1,Testing,JIRA-873,Done,Low,6,93,0,3.6
+E010,Anita Rao,Engineering,Architect,Contractor,Bangalore,4,1409,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-03,2,0,Support,JIRA-316,To Do,High,5,90,0,3.0
+E007,Rohan Das,Support,Support Engineer,Contractor,Pune,9,1744,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-09,3,1,Development,JIRA-546,To Do,Critical,2,90,4,3.9
+E007,Rohan Das,Support,Support Engineer,Full-Time,Hyderabad,1,1265,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-19,9,1,Development,JIRA-547,To Do,Medium,7,98,3,4.0
+E007,Rohan Das,Support,Support Engineer,Contractor,Pune,6,944,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-17,10,0,Testing,JIRA-894,In Progress,High,3,87,0,3.3
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Bangalore,3,1886,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-08,9,1,Support,JIRA-984,Done,High,3,94,0,3.9
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Chennai,9,751,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-07,9,1,Development,JIRA-158,In Progress,High,2,100,0,4.2
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Hyderabad,10,1934,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-30,7,1,Testing,JIRA-163,In Progress,Low,6,82,4,4.3
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Hyderabad,9,1670,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-15,7,1,Support,JIRA-496,In Progress,High,1,100,5,3.7
+E006,Kavya Iyer,Engineering,Developer,Contractor,Chennai,5,1944,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-05,7,0,Testing,JIRA-458,In Progress,Critical,3,99,5,4.9
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Pune,11,1678,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-25,8,1,Development,JIRA-471,In Progress,Medium,4,90,3,3.4
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Bangalore,9,1705,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-05,7,0,Architecture,JIRA-257,To Do,Medium,3,94,0,3.8
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Hyderabad,4,1693,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-09,6,1,Testing,JIRA-476,Done,Critical,8,89,3,4.0
+E007,Rohan Das,Support,Support Engineer,Full-Time,Pune,5,706,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-22,7,0,Development,JIRA-391,To Do,Medium,5,94,4,3.3
+E007,Rohan Das,Support,Support Engineer,Full-Time,Hyderabad,6,654,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-30,2,1,Support,JIRA-341,In Progress,Low,6,87,0,3.6
+E002,Neha Verma,Engineering,Developer,Full-Time,Pune,1,1187,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-20,4,1,Architecture,JIRA-730,To Do,Low,1,88,1,4.7
+E009,Suresh Kumar,Engineering,Developer,Contractor,Bangalore,5,1086,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-03,3,0,Testing,JIRA-529,Done,Critical,2,83,3,4.2
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Pune,5,1479,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-06,7,0,Architecture,JIRA-291,Done,Low,6,82,4,4.1
+E009,Suresh Kumar,Engineering,Developer,Contractor,Hyderabad,1,1901,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-02,7,1,Development,JIRA-465,To Do,High,4,100,0,4.5
+E006,Kavya Iyer,Engineering,Developer,Contractor,Chennai,11,958,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-03,9,0,Testing,JIRA-164,Done,Critical,1,89,1,3.1
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Hyderabad,9,1569,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-21,2,0,Support,JIRA-465,To Do,High,5,83,2,3.9
+E007,Rohan Das,Support,Support Engineer,Contractor,Chennai,3,1616,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-27,7,1,Development,JIRA-844,In Progress,Low,7,99,1,4.1
+E006,Kavya Iyer,Engineering,Developer,Contractor,Chennai,5,1513,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-06,4,1,Support,JIRA-557,To Do,High,7,88,5,5.0
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Chennai,9,1991,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-12,2,0,Architecture,JIRA-135,To Do,Low,4,100,2,3.7
+E010,Anita Rao,Engineering,Architect,Full-Time,Hyderabad,6,1361,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-08,3,0,Support,JIRA-507,In Progress,High,4,83,0,4.5
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Chennai,5,1513,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-25,6,1,Testing,JIRA-225,To Do,Low,8,85,5,3.9
+E002,Neha Verma,Engineering,Developer,Contractor,Bangalore,9,1710,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-12,6,0,Testing,JIRA-912,In Progress,Medium,2,86,1,3.5
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Hyderabad,9,865,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-24,3,1,Architecture,JIRA-834,Done,Critical,7,93,4,3.1
+E006,Kavya Iyer,Engineering,Developer,Contractor,Chennai,3,1729,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-29,4,1,Development,JIRA-951,To Do,Medium,5,85,1,3.6
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Bangalore,5,1002,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-30,4,1,Development,JIRA-614,Done,Medium,3,85,5,4.2
+E010,Anita Rao,Engineering,Architect,Full-Time,Bangalore,2,693,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-23,5,1,Development,JIRA-609,Done,High,5,95,1,4.6
+E007,Rohan Das,Support,Support Engineer,Full-Time,Bangalore,3,1500,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-30,9,1,Testing,JIRA-448,Done,Medium,6,90,5,5.0
+E006,Kavya Iyer,Engineering,Developer,Contractor,Bangalore,6,1095,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-09,3,1,Architecture,JIRA-353,To Do,Low,1,89,3,4.7
+E007,Rohan Das,Support,Support Engineer,Full-Time,Chennai,10,1240,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-25,4,1,Architecture,JIRA-610,In Progress,Critical,1,82,3,4.0
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Bangalore,1,1176,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-07,9,1,Development,JIRA-967,To Do,Critical,3,88,5,3.7
+E007,Rohan Das,Support,Support Engineer,Contractor,Bangalore,10,1750,M002,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-03,7,1,Development,JIRA-495,Done,Critical,5,99,5,4.2
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Chennai,9,1348,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-26,5,1,Development,JIRA-146,To Do,Medium,6,95,4,3.9
+E010,Anita Rao,Engineering,Architect,Contractor,Chennai,3,1404,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-09,7,1,Support,JIRA-586,To Do,High,6,83,3,4.2
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Pune,12,705,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-31,4,1,Testing,JIRA-941,Done,Medium,1,98,5,3.2
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Pune,7,1017,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-21,10,1,Development,JIRA-822,To Do,Medium,6,95,4,3.8
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Chennai,11,1994,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-28,9,0,Testing,JIRA-385,Done,High,4,89,2,4.4
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Chennai,5,849,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-31,8,1,Testing,JIRA-397,To Do,High,2,91,3,4.3
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Chennai,3,823,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-13,5,0,Testing,JIRA-753,To Do,Low,2,93,2,4.4
+E002,Neha Verma,Engineering,Developer,Full-Time,Hyderabad,11,1574,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-01,5,1,Support,JIRA-392,Done,Low,2,100,4,3.5
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Bangalore,7,1614,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-27,6,0,Development,JIRA-405,Done,Low,6,89,3,5.0
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Hyderabad,5,994,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-01,7,0,Architecture,JIRA-763,In Progress,Medium,1,90,2,4.1
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Hyderabad,9,1271,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-09,8,0,Testing,JIRA-243,In Progress,High,4,80,2,3.8
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Bangalore,5,1938,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-22,5,0,Development,JIRA-576,In Progress,Medium,7,96,5,4.5
+E002,Neha Verma,Engineering,Developer,Full-Time,Pune,3,1579,M002,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-24,9,1,Architecture,JIRA-818,Done,Critical,4,87,5,4.5
+E002,Neha Verma,Engineering,Developer,Contractor,Bangalore,10,829,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-29,10,0,Testing,JIRA-268,In Progress,Critical,2,86,5,4.2
+E002,Neha Verma,Engineering,Developer,Full-Time,Hyderabad,3,1651,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-29,9,0,Architecture,JIRA-788,In Progress,Low,7,88,0,4.5
+E010,Anita Rao,Engineering,Architect,Contractor,Chennai,12,730,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-03,3,1,Development,JIRA-393,In Progress,Medium,3,100,5,4.3
+E007,Rohan Das,Support,Support Engineer,Contractor,Hyderabad,7,1369,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-27,10,0,Support,JIRA-221,To Do,Critical,3,87,0,4.5
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Hyderabad,4,1106,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-13,7,0,Support,JIRA-293,Done,Low,1,93,4,4.5
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Bangalore,10,668,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-14,2,0,Development,JIRA-511,In Progress,Medium,4,81,1,4.0
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Chennai,4,1218,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-22,10,0,Architecture,JIRA-407,In Progress,Low,3,100,5,3.9
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Chennai,12,1452,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-23,4,1,Architecture,JIRA-288,Done,Critical,4,87,2,4.7
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Hyderabad,7,1741,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-28,8,0,Support,JIRA-308,In Progress,Low,8,91,0,4.1
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Bangalore,2,985,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-18,9,0,Support,JIRA-410,To Do,Medium,4,83,5,5.0
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Hyderabad,4,1730,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-14,6,1,Architecture,JIRA-646,Done,High,5,88,2,4.0
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Chennai,4,1359,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-07,8,0,Testing,JIRA-859,To Do,Low,5,97,4,4.2
+E007,Rohan Das,Support,Support Engineer,Full-Time,Chennai,4,1377,M002,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-10,9,1,Support,JIRA-881,In Progress,Critical,8,85,5,4.6
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Pune,9,1914,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-16,10,0,Development,JIRA-937,Done,Low,1,93,1,4.7
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Bangalore,4,1635,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-15,7,0,Architecture,JIRA-775,In Progress,Low,1,97,4,3.8
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Chennai,1,1628,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-16,4,0,Development,JIRA-636,To Do,Medium,4,99,4,3.5
+E006,Kavya Iyer,Engineering,Developer,Contractor,Bangalore,6,1431,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-20,5,0,Support,JIRA-800,To Do,Low,2,92,3,3.8
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Pune,2,1623,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-10,7,0,Development,JIRA-335,To Do,Critical,5,81,0,4.4
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Pune,6,632,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-06,4,1,Development,JIRA-406,To Do,Medium,7,97,2,3.8
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Bangalore,2,1495,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-02,3,1,Architecture,JIRA-892,In Progress,Low,5,94,3,3.5
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Hyderabad,2,1866,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-28,5,0,Development,JIRA-374,To Do,Critical,3,92,2,3.7
+E002,Neha Verma,Engineering,Developer,Contractor,Hyderabad,6,1152,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-30,4,0,Testing,JIRA-541,In Progress,Critical,2,80,0,3.7
+E002,Neha Verma,Engineering,Developer,Contractor,Hyderabad,1,1197,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-08,8,0,Testing,JIRA-685,Done,Medium,7,85,1,3.5
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Pune,7,1165,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-10,6,1,Development,JIRA-469,In Progress,Medium,8,99,4,3.4
+E002,Neha Verma,Engineering,Developer,Full-Time,Hyderabad,6,1870,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-20,7,1,Support,JIRA-540,Done,Medium,5,90,4,4.9
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Hyderabad,6,1196,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-21,5,1,Architecture,JIRA-387,In Progress,High,2,98,1,4.2
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Hyderabad,12,1029,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-13,6,0,Architecture,JIRA-789,In Progress,Medium,5,87,2,4.3
+E007,Rohan Das,Support,Support Engineer,Contractor,Hyderabad,10,1420,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-05,10,0,Support,JIRA-818,Done,Low,2,87,5,4.3
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Chennai,7,816,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-03,3,1,Testing,JIRA-622,Done,Medium,8,91,3,3.9
+E010,Anita Rao,Engineering,Architect,Contractor,Bangalore,8,814,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-10,8,0,Development,JIRA-951,Done,Medium,6,89,2,3.9
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Hyderabad,2,1497,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-31,7,0,Support,JIRA-145,Done,Low,1,90,5,3.2
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Pune,6,1746,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-03,9,0,Architecture,JIRA-744,To Do,Medium,7,92,0,4.5
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Hyderabad,1,1039,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-07,6,0,Development,JIRA-918,Done,Medium,6,90,1,3.9
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Hyderabad,10,1403,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-03,7,1,Architecture,JIRA-732,To Do,High,2,84,2,3.2
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Pune,9,1395,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-12,4,1,Architecture,JIRA-290,In Progress,Medium,3,95,2,3.3
+E006,Kavya Iyer,Engineering,Developer,Full-Time,Chennai,1,1592,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-09,5,1,Architecture,JIRA-518,Done,Critical,7,94,3,3.3
+E010,Anita Rao,Engineering,Architect,Full-Time,Chennai,1,1162,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-20,10,1,Testing,JIRA-899,In Progress,Critical,2,98,0,3.5
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Hyderabad,9,1047,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-04,3,0,Support,JIRA-995,To Do,Critical,5,91,0,3.9
+E002,Neha Verma,Engineering,Developer,Contractor,Hyderabad,3,1861,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-14,5,0,Development,JIRA-683,In Progress,High,3,90,5,3.6
+E010,Anita Rao,Engineering,Architect,Full-Time,Pune,7,721,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-30,4,0,Testing,JIRA-249,Done,High,4,92,3,3.3
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Bangalore,11,790,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-25,10,1,Support,JIRA-565,In Progress,High,1,82,5,4.9
+E006,Kavya Iyer,Engineering,Developer,Contractor,Pune,7,1033,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-20,6,1,Support,JIRA-445,Done,Medium,8,90,5,4.5
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Bangalore,2,923,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-10,9,0,Architecture,JIRA-307,Done,Medium,5,85,2,3.2
+E006,Kavya Iyer,Engineering,Developer,Contractor,Pune,1,1411,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-06,5,1,Development,JIRA-820,To Do,Low,4,95,0,3.3
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Bangalore,1,1303,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-13,8,0,Architecture,JIRA-172,To Do,Critical,2,83,0,3.6
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Pune,2,1686,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-25,4,1,Support,JIRA-839,To Do,Medium,7,99,5,3.9
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Pune,2,1807,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-27,7,1,Support,JIRA-910,To Do,Medium,5,100,0,3.5
+E010,Anita Rao,Engineering,Architect,Contractor,Bangalore,11,1217,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-16,10,0,Architecture,JIRA-402,Done,Low,4,95,3,3.2
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Chennai,6,870,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-05,8,1,Testing,JIRA-881,In Progress,Low,1,98,0,3.0
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Hyderabad,9,1186,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-29,8,1,Development,JIRA-755,Done,Medium,5,82,2,3.2
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Hyderabad,10,1899,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-04,6,1,Testing,JIRA-159,To Do,Low,7,83,3,4.2
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Bangalore,1,881,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-12,4,1,Support,JIRA-635,Done,High,3,91,1,4.5
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Chennai,7,1157,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-19,6,0,Architecture,JIRA-566,Done,High,1,95,4,3.3
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Bangalore,4,1642,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-19,2,0,Testing,JIRA-147,In Progress,High,7,84,1,4.9
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Pune,6,1108,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-21,7,1,Development,JIRA-685,In Progress,Low,1,85,1,4.6
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Chennai,5,1270,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-05,10,1,Development,JIRA-477,To Do,High,5,99,1,3.9
+E010,Anita Rao,Engineering,Architect,Full-Time,Pune,3,613,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-19,2,0,Support,JIRA-751,Done,Low,6,80,5,3.8
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Hyderabad,8,722,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-14,6,0,Development,JIRA-337,Done,Critical,6,94,5,3.2
+E002,Neha Verma,Engineering,Developer,Contractor,Bangalore,10,1762,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-09,8,0,Testing,JIRA-398,In Progress,High,7,90,2,3.9
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Pune,10,823,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-30,3,0,Architecture,JIRA-577,In Progress,Critical,2,97,2,4.9
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Chennai,2,785,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-20,6,0,Testing,JIRA-955,In Progress,Medium,2,87,2,3.8
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Bangalore,7,1526,M002,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-17,3,1,Development,JIRA-923,To Do,Low,1,81,1,3.3
+E007,Rohan Das,Support,Support Engineer,Full-Time,Chennai,2,644,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-13,5,1,Testing,JIRA-194,In Progress,Low,1,94,0,3.3
+E010,Anita Rao,Engineering,Architect,Contractor,Hyderabad,1,1383,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-22,4,1,Testing,JIRA-291,In Progress,High,8,84,0,4.2
+E010,Anita Rao,Engineering,Architect,Contractor,Hyderabad,7,1727,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-11,2,0,Support,JIRA-492,To Do,Critical,4,100,4,3.5
+E009,Suresh Kumar,Engineering,Developer,Contractor,Hyderabad,9,1592,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-25,10,1,Architecture,JIRA-376,To Do,Low,6,99,1,3.1
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Chennai,10,1076,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-21,3,0,Testing,JIRA-372,Done,Low,4,98,3,3.7
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Chennai,10,657,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-16,4,0,Architecture,JIRA-655,In Progress,Medium,8,81,0,3.1
+E010,Anita Rao,Engineering,Architect,Contractor,Bangalore,6,1857,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-02,4,1,Testing,JIRA-921,In Progress,Low,1,84,4,4.4
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Bangalore,6,1956,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-24,3,1,Support,JIRA-430,To Do,Medium,7,100,3,4.3
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Pune,11,1806,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-14,8,1,Support,JIRA-230,To Do,Low,7,98,0,3.4
+E006,Kavya Iyer,Engineering,Developer,Full-Time,Hyderabad,3,1278,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-15,5,1,Support,JIRA-271,Done,Low,6,94,0,3.5
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Bangalore,12,602,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-23,8,1,Architecture,JIRA-270,In Progress,Critical,7,91,4,3.8
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Pune,8,750,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-11,6,0,Support,JIRA-367,To Do,Low,6,85,3,3.3
+E002,Neha Verma,Engineering,Developer,Full-Time,Chennai,10,1856,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-30,2,1,Testing,JIRA-721,In Progress,Medium,1,83,2,3.4
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Chennai,5,1086,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-14,2,1,Architecture,JIRA-257,To Do,High,1,93,0,3.6
+E010,Anita Rao,Engineering,Architect,Full-Time,Bangalore,4,949,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-13,3,1,Development,JIRA-415,In Progress,Critical,8,88,0,4.3
+E007,Rohan Das,Support,Support Engineer,Contractor,Chennai,3,1512,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-24,6,1,Architecture,JIRA-369,To Do,High,1,84,5,4.3
+E002,Neha Verma,Engineering,Developer,Contractor,Pune,9,724,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-21,10,1,Architecture,JIRA-686,To Do,Critical,5,82,3,4.8
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Bangalore,8,954,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-06,5,0,Testing,JIRA-143,In Progress,Low,7,86,5,3.3
+E010,Anita Rao,Engineering,Architect,Full-Time,Bangalore,7,1739,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-21,10,1,Support,JIRA-632,In Progress,Low,7,83,3,3.3
+E010,Anita Rao,Engineering,Architect,Full-Time,Bangalore,10,806,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-07,10,1,Architecture,JIRA-370,In Progress,Critical,8,81,1,3.6
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Bangalore,7,1278,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-08,2,1,Support,JIRA-481,To Do,High,5,89,2,4.7
+E002,Neha Verma,Engineering,Developer,Contractor,Hyderabad,6,1151,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-09,3,0,Architecture,JIRA-316,In Progress,Critical,6,81,4,4.6
+E002,Neha Verma,Engineering,Developer,Contractor,Pune,9,1764,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-15,4,0,Testing,JIRA-957,To Do,Medium,1,94,0,4.8
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Hyderabad,11,853,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-24,5,1,Architecture,JIRA-708,In Progress,Medium,8,98,4,3.7
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Chennai,1,1391,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-17,4,0,Testing,JIRA-762,To Do,Medium,5,100,3,4.0
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Pune,10,617,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-28,6,1,Support,JIRA-533,In Progress,High,8,88,1,3.9
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Bangalore,9,1956,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-26,10,1,Support,JIRA-800,To Do,Critical,2,90,2,4.3
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Pune,3,1659,M002,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-11,2,1,Support,JIRA-797,To Do,Low,8,89,2,4.8
+E007,Rohan Das,Support,Support Engineer,Full-Time,Pune,6,1055,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-17,7,1,Testing,JIRA-960,Done,Medium,5,83,3,3.3
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Chennai,11,782,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-18,7,0,Support,JIRA-530,In Progress,High,5,98,2,3.9
+E002,Neha Verma,Engineering,Developer,Full-Time,Hyderabad,4,1624,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-04,8,1,Architecture,JIRA-155,To Do,Medium,4,90,3,5.0
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Bangalore,8,1281,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-21,7,0,Development,JIRA-562,In Progress,Medium,3,98,1,4.0
+E002,Neha Verma,Engineering,Developer,Contractor,Hyderabad,7,1478,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-09,8,0,Development,JIRA-646,To Do,High,1,90,4,3.4
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Chennai,3,810,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-15,10,1,Testing,JIRA-166,To Do,High,5,94,5,4.0
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Chennai,8,1335,M002,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-28,4,1,Development,JIRA-333,To Do,Medium,4,80,4,4.0
+E002,Neha Verma,Engineering,Developer,Full-Time,Hyderabad,11,1123,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-15,2,0,Development,JIRA-149,Done,Low,7,94,3,3.2
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Pune,12,1890,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-14,6,1,Development,JIRA-778,Done,High,3,93,0,4.0
+E010,Anita Rao,Engineering,Architect,Full-Time,Bangalore,8,1006,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-19,6,0,Support,JIRA-820,In Progress,High,3,81,4,4.0
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Bangalore,1,1975,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-22,3,1,Testing,JIRA-192,Done,Low,2,88,5,3.5
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Bangalore,3,680,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-30,7,1,Architecture,JIRA-856,To Do,Low,1,80,1,4.3
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Chennai,12,790,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-23,7,0,Development,JIRA-510,In Progress,Critical,5,92,5,4.7
+E007,Rohan Das,Support,Support Engineer,Full-Time,Bangalore,3,812,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-08,9,1,Testing,JIRA-725,In Progress,High,1,84,3,4.8
+E002,Neha Verma,Engineering,Developer,Full-Time,Bangalore,5,1941,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-29,2,0,Support,JIRA-631,Done,Low,7,87,3,3.7
+E007,Rohan Das,Support,Support Engineer,Full-Time,Bangalore,11,921,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-23,9,0,Development,JIRA-869,In Progress,High,4,90,2,3.1
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Hyderabad,4,761,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-11,9,1,Development,JIRA-977,In Progress,Critical,6,83,3,4.5
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Bangalore,9,1724,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-26,3,1,Testing,JIRA-770,Done,Critical,6,91,0,4.6
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Chennai,12,1526,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-05,3,0,Development,JIRA-449,In Progress,High,6,83,0,4.8
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Bangalore,5,1851,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-22,5,0,Architecture,JIRA-320,In Progress,Medium,6,83,3,3.1
+E010,Anita Rao,Engineering,Architect,Contractor,Hyderabad,11,1806,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-19,9,0,Development,JIRA-666,In Progress,Critical,3,98,1,4.5
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Hyderabad,7,1847,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-25,6,1,Support,JIRA-401,In Progress,Medium,3,93,4,4.4
+E009,Suresh Kumar,Engineering,Developer,Contractor,Pune,4,1029,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-23,7,0,Testing,JIRA-615,Done,High,2,91,4,4.0
+E010,Anita Rao,Engineering,Architect,Contractor,Hyderabad,1,1670,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-13,2,1,Testing,JIRA-154,Done,Low,4,88,1,5.0
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Chennai,4,1708,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-23,7,1,Development,JIRA-730,Done,Medium,7,87,4,4.6
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Hyderabad,7,1240,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-29,2,1,Testing,JIRA-735,In Progress,Medium,6,98,4,4.5
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Pune,11,752,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-19,4,0,Architecture,JIRA-141,In Progress,High,5,84,1,4.2
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Pune,1,914,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-22,2,1,Architecture,JIRA-908,Done,High,2,90,4,3.4
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Hyderabad,9,1699,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-05,3,1,Testing,JIRA-318,Done,High,6,91,2,3.4
+E010,Anita Rao,Engineering,Architect,Full-Time,Bangalore,11,1308,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-31,5,0,Development,JIRA-798,In Progress,Critical,2,92,2,4.1
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Hyderabad,8,689,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-28,5,1,Development,JIRA-198,To Do,Low,2,86,5,4.3
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Pune,9,1491,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-23,4,0,Architecture,JIRA-834,In Progress,Low,2,82,0,3.4
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Chennai,7,1394,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-05,8,1,Support,JIRA-117,In Progress,Low,1,100,5,4.2
+E010,Anita Rao,Engineering,Architect,Full-Time,Chennai,9,817,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-14,6,0,Support,JIRA-883,In Progress,Critical,7,80,3,3.3
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Chennai,11,895,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-17,7,0,Testing,JIRA-226,To Do,Low,7,97,4,4.9
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Pune,7,1922,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-17,4,0,Testing,JIRA-731,In Progress,Medium,2,85,5,4.6
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Chennai,11,737,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-30,3,0,Architecture,JIRA-438,In Progress,Medium,4,83,2,4.2
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Chennai,10,1950,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-01,4,1,Support,JIRA-538,To Do,Low,6,87,1,4.4
+E007,Rohan Das,Support,Support Engineer,Contractor,Pune,11,1279,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-23,9,1,Support,JIRA-893,In Progress,Critical,2,85,5,4.2
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Chennai,12,1883,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-27,3,0,Development,JIRA-932,Done,Critical,4,81,4,3.5
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Chennai,7,1057,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-11,4,1,Development,JIRA-506,In Progress,Low,4,99,5,3.3
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Pune,10,1758,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-29,9,1,Development,JIRA-324,In Progress,Medium,2,88,2,3.5
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Hyderabad,8,1531,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-28,2,1,Development,JIRA-820,Done,High,5,98,4,4.1
+E007,Rohan Das,Support,Support Engineer,Full-Time,Chennai,7,1056,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-24,7,1,Architecture,JIRA-911,In Progress,Low,3,94,1,3.5
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Pune,3,1341,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-14,5,1,Support,JIRA-837,To Do,Critical,8,95,1,4.2
+E007,Rohan Das,Support,Support Engineer,Full-Time,Pune,10,1813,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-16,4,0,Testing,JIRA-157,To Do,High,3,96,3,4.2
+E010,Anita Rao,Engineering,Architect,Contractor,Bangalore,4,1519,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-26,9,0,Testing,JIRA-950,In Progress,Medium,3,99,5,4.0
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Bangalore,4,1374,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-29,4,0,Development,JIRA-307,Done,Critical,3,99,0,3.4
+E010,Anita Rao,Engineering,Architect,Full-Time,Bangalore,8,1950,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-03,10,0,Architecture,JIRA-634,In Progress,High,1,96,3,3.5
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Hyderabad,3,1121,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-23,5,0,Support,JIRA-712,Done,Critical,5,86,0,4.4
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Bangalore,7,1940,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-03,7,1,Support,JIRA-209,To Do,Critical,5,88,4,3.8
+E006,Kavya Iyer,Engineering,Developer,Contractor,Pune,7,1730,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-18,4,1,Architecture,JIRA-359,In Progress,High,7,84,5,3.2
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Bangalore,4,1641,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-20,7,0,Testing,JIRA-498,Done,Low,2,84,3,4.9
+E007,Rohan Das,Support,Support Engineer,Contractor,Pune,6,763,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-05,8,1,Support,JIRA-828,Done,Low,3,100,3,3.9
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Bangalore,10,1645,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-19,4,0,Support,JIRA-344,Done,Low,3,82,2,4.6
+E006,Kavya Iyer,Engineering,Developer,Full-Time,Bangalore,12,740,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-26,10,1,Support,JIRA-455,In Progress,Medium,4,94,3,4.1
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Bangalore,9,1202,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-27,3,1,Support,JIRA-810,In Progress,Critical,8,87,2,4.9
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Hyderabad,2,1128,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-27,8,0,Testing,JIRA-919,In Progress,Critical,6,96,4,3.0
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Hyderabad,11,1300,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-19,10,0,Architecture,JIRA-421,In Progress,Medium,5,85,5,4.4
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Pune,12,1095,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-17,5,0,Testing,JIRA-954,To Do,High,3,83,0,4.8
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Hyderabad,6,1871,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-01,9,1,Architecture,JIRA-287,Done,High,7,87,4,3.3
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Chennai,7,957,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-31,3,1,Support,JIRA-805,To Do,Low,4,92,4,3.2
+E006,Kavya Iyer,Engineering,Developer,Contractor,Pune,9,1138,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-25,6,1,Support,JIRA-474,To Do,Critical,7,86,3,4.4
+E006,Kavya Iyer,Engineering,Developer,Contractor,Chennai,8,968,M002,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-24,5,0,Support,JIRA-923,To Do,Critical,7,86,1,4.6
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Pune,7,1623,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-21,10,1,Architecture,JIRA-407,In Progress,Low,7,83,5,3.3
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Hyderabad,12,1285,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-31,7,1,Support,JIRA-452,To Do,Critical,2,91,5,4.9
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Chennai,6,1265,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-06,9,0,Architecture,JIRA-728,In Progress,Critical,3,85,5,4.6
+E006,Kavya Iyer,Engineering,Developer,Contractor,Bangalore,2,931,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-10,5,1,Support,JIRA-768,In Progress,High,7,88,3,4.6
+E006,Kavya Iyer,Engineering,Developer,Contractor,Hyderabad,3,976,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-03,4,0,Support,JIRA-861,Done,Low,4,85,3,3.2
+E002,Neha Verma,Engineering,Developer,Full-Time,Bangalore,7,1673,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-05,3,1,Testing,JIRA-186,Done,Critical,5,87,1,4.5
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Bangalore,1,1958,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-09,7,1,Architecture,JIRA-991,Done,High,8,84,5,4.1
+E010,Anita Rao,Engineering,Architect,Contractor,Chennai,6,1586,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-30,3,1,Support,JIRA-474,In Progress,High,3,89,0,3.0
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Bangalore,12,1607,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-19,6,0,Architecture,JIRA-917,In Progress,Medium,1,97,2,3.4
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Pune,12,1922,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-26,8,0,Support,JIRA-181,In Progress,Medium,5,89,5,4.5
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Pune,3,1193,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-13,9,1,Support,JIRA-817,Done,Critical,4,90,0,3.3
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Chennai,5,856,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-12,2,0,Development,JIRA-254,To Do,Critical,4,90,3,3.6
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Chennai,2,899,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-30,6,1,Development,JIRA-656,In Progress,Medium,4,88,3,4.7
+E002,Neha Verma,Engineering,Developer,Contractor,Pune,12,668,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-25,9,0,Testing,JIRA-584,In Progress,High,6,85,5,4.5
+E009,Suresh Kumar,Engineering,Developer,Contractor,Hyderabad,11,1211,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-08,7,0,Testing,JIRA-215,To Do,Critical,6,80,1,4.6
+E010,Anita Rao,Engineering,Architect,Full-Time,Bangalore,1,1790,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-26,4,1,Development,JIRA-354,To Do,Critical,2,99,2,4.9
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Bangalore,3,1599,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-23,7,1,Architecture,JIRA-850,To Do,Low,7,91,5,3.3
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Chennai,9,1603,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-15,4,1,Support,JIRA-849,In Progress,High,3,82,4,3.3
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Hyderabad,1,1906,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-04,4,0,Support,JIRA-894,Done,Medium,6,82,5,4.9
+E007,Rohan Das,Support,Support Engineer,Contractor,Pune,10,1179,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-03,8,1,Development,JIRA-198,Done,Low,1,84,1,4.7
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Bangalore,1,1769,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-01,9,1,Development,JIRA-475,To Do,Low,1,86,5,4.0
+E002,Neha Verma,Engineering,Developer,Full-Time,Chennai,9,1451,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-21,2,1,Development,JIRA-851,To Do,High,2,86,4,3.2
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Pune,9,1945,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-25,4,1,Development,JIRA-884,Done,High,8,93,0,3.3
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Pune,9,1828,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-26,7,1,Support,JIRA-965,In Progress,Critical,7,90,4,3.5
+E009,Suresh Kumar,Engineering,Developer,Contractor,Chennai,8,1516,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-25,2,0,Support,JIRA-710,To Do,Medium,5,80,2,5.0
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Pune,2,677,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-02,7,0,Testing,JIRA-371,In Progress,Medium,4,88,2,3.2
+E007,Rohan Das,Support,Support Engineer,Full-Time,Bangalore,12,1264,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-28,4,1,Development,JIRA-709,Done,High,1,98,3,3.2
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Hyderabad,2,1064,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-23,8,0,Support,JIRA-636,To Do,High,3,90,4,4.4
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Hyderabad,10,1778,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-13,5,1,Support,JIRA-905,In Progress,Medium,3,90,0,4.0
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Bangalore,7,1627,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-26,4,0,Architecture,JIRA-672,To Do,Critical,7,100,4,3.4
+E010,Anita Rao,Engineering,Architect,Full-Time,Bangalore,5,1480,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-16,3,0,Architecture,JIRA-533,In Progress,High,4,90,2,4.2
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Hyderabad,10,898,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-11,2,0,Testing,JIRA-801,In Progress,Medium,2,83,5,3.1
+E010,Anita Rao,Engineering,Architect,Contractor,Bangalore,6,827,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-25,9,1,Development,JIRA-439,To Do,Medium,4,97,4,4.5
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Bangalore,7,1793,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-09,6,0,Development,JIRA-390,To Do,High,1,94,5,4.9
+E002,Neha Verma,Engineering,Developer,Contractor,Chennai,2,639,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-12,8,0,Architecture,JIRA-620,Done,Low,6,95,4,4.1
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Bangalore,1,1106,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-02,7,1,Architecture,JIRA-862,To Do,Low,6,91,2,4.3
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Chennai,7,660,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-18,5,0,Support,JIRA-502,Done,Medium,2,92,4,4.9
+E010,Anita Rao,Engineering,Architect,Full-Time,Pune,7,1239,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-27,9,0,Testing,JIRA-768,To Do,Medium,3,89,5,4.4
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Pune,6,738,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-28,4,1,Testing,JIRA-844,To Do,High,7,93,2,3.9
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Bangalore,3,978,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-19,6,0,Testing,JIRA-336,Done,Low,6,82,5,4.6
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Chennai,3,1393,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-24,9,0,Testing,JIRA-297,To Do,Low,7,80,2,4.9
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Bangalore,3,1499,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-18,7,1,Testing,JIRA-537,In Progress,Low,7,90,3,4.2
+E010,Anita Rao,Engineering,Architect,Full-Time,Bangalore,8,1535,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-04,5,1,Development,JIRA-671,In Progress,Low,4,89,3,3.8
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Hyderabad,5,1855,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-30,10,0,Architecture,JIRA-949,Done,Critical,2,96,0,3.4
+E010,Anita Rao,Engineering,Architect,Contractor,Hyderabad,6,1523,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-09,4,1,Testing,JIRA-565,To Do,High,6,100,5,4.6
+E002,Neha Verma,Engineering,Developer,Contractor,Chennai,2,1672,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-08,10,0,Architecture,JIRA-663,In Progress,Low,3,90,4,4.7
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Pune,12,705,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-25,6,1,Architecture,JIRA-395,Done,Medium,2,84,1,3.0
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Hyderabad,9,611,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-30,5,0,Architecture,JIRA-564,In Progress,Critical,2,99,4,3.0
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Bangalore,3,903,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-09,7,0,Testing,JIRA-974,To Do,High,6,82,0,3.2
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Pune,8,1785,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-13,2,0,Support,JIRA-430,In Progress,Critical,2,93,4,3.1
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Chennai,9,1447,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-08,5,0,Development,JIRA-685,Done,Low,8,99,5,3.6
+E010,Anita Rao,Engineering,Architect,Contractor,Pune,10,1752,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-17,10,1,Architecture,JIRA-927,To Do,Medium,5,86,0,3.2
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Hyderabad,7,693,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-17,7,0,Development,JIRA-755,To Do,High,5,82,2,3.6
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Bangalore,11,1282,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-19,8,0,Testing,JIRA-298,In Progress,High,8,95,0,4.3
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Chennai,8,1447,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-10,10,1,Support,JIRA-668,Done,Low,4,98,5,3.7
+E006,Kavya Iyer,Engineering,Developer,Contractor,Bangalore,6,1368,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-10,8,0,Development,JIRA-985,In Progress,High,1,88,3,3.2
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Pune,9,1219,M002,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-29,3,1,Development,JIRA-896,To Do,Low,8,96,0,4.6
+E009,Suresh Kumar,Engineering,Developer,Contractor,Hyderabad,12,1672,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-13,7,0,Development,JIRA-941,Done,Medium,4,81,3,3.8
+E009,Suresh Kumar,Engineering,Developer,Contractor,Bangalore,11,1817,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-01,7,1,Development,JIRA-205,Done,High,1,98,2,4.3
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Chennai,5,1690,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-13,9,0,Support,JIRA-252,To Do,High,2,80,4,4.1
+E002,Neha Verma,Engineering,Developer,Contractor,Chennai,5,889,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-04,5,0,Development,JIRA-418,Done,High,8,81,1,3.1
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Bangalore,7,1402,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-25,9,1,Support,JIRA-440,To Do,Low,8,98,1,3.2
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Hyderabad,8,1074,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-30,4,1,Support,JIRA-501,To Do,High,6,94,3,3.1
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Hyderabad,3,1178,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-23,4,0,Architecture,JIRA-937,Done,Low,6,97,5,3.1
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Hyderabad,4,1871,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-30,10,0,Architecture,JIRA-493,To Do,High,4,98,3,4.6
+E007,Rohan Das,Support,Support Engineer,Contractor,Pune,3,1957,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-20,9,0,Architecture,JIRA-433,Done,Low,8,85,2,4.9
+E002,Neha Verma,Engineering,Developer,Contractor,Chennai,8,1920,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-07,3,0,Testing,JIRA-694,Done,Low,3,84,3,4.1
+E007,Rohan Das,Support,Support Engineer,Contractor,Pune,4,1995,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-06,6,1,Architecture,JIRA-835,In Progress,Low,1,99,4,3.8
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Bangalore,1,1746,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-04,3,1,Development,JIRA-340,In Progress,Critical,6,92,3,3.8
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Hyderabad,3,985,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-12,7,1,Testing,JIRA-395,Done,Medium,3,80,0,4.3
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Pune,2,881,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-12,9,1,Testing,JIRA-565,Done,Critical,8,92,2,3.5
+E007,Rohan Das,Support,Support Engineer,Contractor,Pune,12,1627,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-01,8,1,Development,JIRA-138,Done,Critical,6,83,4,4.0
+E002,Neha Verma,Engineering,Developer,Contractor,Hyderabad,9,760,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-16,5,1,Development,JIRA-800,Done,High,1,90,4,4.6
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Chennai,7,1322,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-02,6,0,Development,JIRA-811,Done,High,5,81,5,3.9
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Bangalore,5,1592,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-04,4,0,Support,JIRA-358,To Do,High,5,88,0,4.5
+E010,Anita Rao,Engineering,Architect,Full-Time,Hyderabad,6,959,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-28,5,1,Testing,JIRA-918,Done,Low,6,82,1,4.2
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Hyderabad,4,1953,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-18,4,0,Support,JIRA-155,Done,High,2,81,1,3.9
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Hyderabad,11,1398,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-31,6,0,Architecture,JIRA-112,In Progress,Critical,7,90,4,4.4
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Hyderabad,10,1935,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-28,7,1,Support,JIRA-921,To Do,High,7,94,5,4.5
+E010,Anita Rao,Engineering,Architect,Contractor,Pune,6,1721,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-03,2,0,Development,JIRA-521,To Do,Low,8,91,1,4.5
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Bangalore,1,1816,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-03,3,0,Development,JIRA-976,Done,Medium,7,100,4,4.6
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Chennai,5,1556,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-14,9,1,Architecture,JIRA-808,Done,High,5,85,0,3.6
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Bangalore,5,1142,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-25,9,0,Architecture,JIRA-305,Done,Critical,3,100,3,3.2
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Hyderabad,12,1130,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-14,2,0,Development,JIRA-685,Done,High,8,80,3,3.3
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Chennai,3,1275,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-12,2,1,Architecture,JIRA-546,In Progress,Low,4,80,3,4.9
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Chennai,11,1220,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-06,2,0,Support,JIRA-647,In Progress,Low,8,89,5,3.4
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Chennai,12,1398,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-25,7,1,Development,JIRA-747,In Progress,Medium,3,81,1,3.1
+E010,Anita Rao,Engineering,Architect,Contractor,Bangalore,9,1917,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-01,9,1,Development,JIRA-137,In Progress,Low,6,81,3,3.2
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Pune,2,675,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-30,9,0,Architecture,JIRA-733,To Do,Medium,3,80,1,4.3
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Bangalore,2,833,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-30,5,0,Testing,JIRA-536,In Progress,Critical,6,83,5,4.2
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Bangalore,10,955,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-23,3,0,Support,JIRA-244,In Progress,Medium,6,97,1,3.9
+E010,Anita Rao,Engineering,Architect,Full-Time,Hyderabad,3,632,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-09,3,0,Development,JIRA-283,To Do,High,7,95,5,3.3
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Hyderabad,4,957,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-03,4,1,Development,JIRA-742,In Progress,High,7,80,4,3.5
+E002,Neha Verma,Engineering,Developer,Contractor,Pune,8,1882,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-07,6,0,Testing,JIRA-215,To Do,Critical,8,85,1,4.3
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Chennai,4,1490,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-11,7,1,Development,JIRA-206,Done,Low,3,85,0,4.0
+E002,Neha Verma,Engineering,Developer,Full-Time,Hyderabad,10,1787,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-27,8,0,Support,JIRA-335,To Do,High,4,83,1,4.5
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Bangalore,8,1798,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-27,2,1,Testing,JIRA-321,Done,Critical,3,92,2,3.3
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Chennai,3,665,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-18,6,0,Development,JIRA-972,In Progress,Critical,7,85,2,3.4
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Pune,2,1443,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-11,5,1,Architecture,JIRA-385,To Do,Critical,4,87,2,3.9
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Bangalore,7,690,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-30,9,0,Architecture,JIRA-643,In Progress,Critical,2,94,3,3.5
+E009,Suresh Kumar,Engineering,Developer,Contractor,Pune,3,1334,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-14,5,0,Development,JIRA-591,Done,High,3,94,4,4.5
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Hyderabad,3,1358,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-30,2,0,Architecture,JIRA-807,In Progress,Low,5,93,2,4.4
+E010,Anita Rao,Engineering,Architect,Full-Time,Bangalore,10,1287,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-06,10,1,Development,JIRA-213,In Progress,High,8,99,0,3.7
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Pune,3,1285,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-15,10,0,Architecture,JIRA-855,Done,Medium,4,90,2,4.8
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Bangalore,6,1307,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-18,9,0,Architecture,JIRA-826,Done,High,8,99,2,4.6
+E002,Neha Verma,Engineering,Developer,Contractor,Bangalore,2,1400,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-27,6,0,Development,JIRA-268,In Progress,Low,3,95,1,4.7
+E009,Suresh Kumar,Engineering,Developer,Contractor,Pune,8,1310,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-19,9,0,Support,JIRA-293,To Do,Low,4,96,5,3.7
+E010,Anita Rao,Engineering,Architect,Contractor,Hyderabad,10,1963,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-11,9,1,Testing,JIRA-908,In Progress,Medium,5,87,3,3.7
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Chennai,8,940,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-10,10,1,Testing,JIRA-279,Done,Medium,3,87,0,3.1
+E006,Kavya Iyer,Engineering,Developer,Contractor,Chennai,6,977,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-09,10,0,Support,JIRA-452,To Do,High,8,97,1,4.1
+E002,Neha Verma,Engineering,Developer,Contractor,Pune,8,1255,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-26,2,1,Support,JIRA-585,In Progress,Medium,8,90,5,3.2
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Chennai,1,1422,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-09,9,1,Development,JIRA-434,To Do,Medium,4,88,1,3.0
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Hyderabad,4,1604,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-13,10,0,Support,JIRA-507,To Do,Critical,6,92,2,3.0
+E006,Kavya Iyer,Engineering,Developer,Contractor,Bangalore,4,1509,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-20,9,1,Testing,JIRA-925,Done,Critical,7,84,4,4.2
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Chennai,2,1809,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-20,3,0,Architecture,JIRA-754,In Progress,Critical,3,97,3,4.4
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Chennai,9,1604,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-12,6,1,Architecture,JIRA-672,Done,Critical,4,80,0,3.3
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Hyderabad,3,1607,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-08,2,0,Support,JIRA-604,To Do,High,8,98,3,4.7
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Chennai,3,1791,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-24,4,1,Architecture,JIRA-999,Done,Medium,6,85,0,3.5
+E007,Rohan Das,Support,Support Engineer,Contractor,Chennai,9,1908,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-04,10,0,Testing,JIRA-883,To Do,Medium,6,90,5,4.6
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Pune,1,880,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-07,7,1,Architecture,JIRA-448,To Do,Low,4,84,4,3.4
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Hyderabad,8,756,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-09,4,0,Architecture,JIRA-456,In Progress,High,3,94,4,4.0
+E006,Kavya Iyer,Engineering,Developer,Contractor,Bangalore,12,842,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-15,4,0,Testing,JIRA-414,To Do,Medium,3,82,3,4.4
+E002,Neha Verma,Engineering,Developer,Contractor,Hyderabad,1,1002,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-02,2,0,Architecture,JIRA-221,In Progress,Low,2,89,5,3.0
+E002,Neha Verma,Engineering,Developer,Full-Time,Pune,3,1973,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-28,2,0,Testing,JIRA-966,Done,High,6,91,1,4.7
+E010,Anita Rao,Engineering,Architect,Full-Time,Bangalore,10,628,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-02,5,1,Testing,JIRA-872,Done,Low,2,86,4,4.7
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Hyderabad,11,819,M002,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-14,7,1,Architecture,JIRA-319,Done,Medium,7,83,2,3.2
+E002,Neha Verma,Engineering,Developer,Contractor,Chennai,12,1190,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-09,3,1,Architecture,JIRA-218,In Progress,High,8,99,5,3.6
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Chennai,7,986,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-05,9,1,Testing,JIRA-113,Done,Critical,2,92,3,4.0
+E002,Neha Verma,Engineering,Developer,Contractor,Hyderabad,12,1809,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-10,4,0,Support,JIRA-303,In Progress,Medium,7,83,1,4.7
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Hyderabad,6,1574,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-18,9,1,Testing,JIRA-886,In Progress,Low,2,88,3,4.0
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Bangalore,8,1988,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-07,4,1,Support,JIRA-256,In Progress,Low,2,96,3,4.6
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Hyderabad,9,1135,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-12,10,0,Development,JIRA-540,To Do,Critical,8,90,3,3.9
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Pune,8,1482,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-12,6,1,Architecture,JIRA-882,To Do,Critical,8,95,4,4.7
+E009,Suresh Kumar,Engineering,Developer,Contractor,Hyderabad,10,1373,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-26,6,1,Development,JIRA-128,Done,Low,3,91,2,4.6
+E010,Anita Rao,Engineering,Architect,Contractor,Hyderabad,2,1476,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-18,7,1,Support,JIRA-157,Done,Medium,4,87,5,3.6
+E002,Neha Verma,Engineering,Developer,Contractor,Bangalore,6,947,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-25,10,1,Development,JIRA-571,Done,Critical,7,88,0,4.4
+E010,Anita Rao,Engineering,Architect,Contractor,Hyderabad,6,1772,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-21,9,0,Testing,JIRA-444,In Progress,High,3,99,2,3.7
+E007,Rohan Das,Support,Support Engineer,Full-Time,Pune,5,1143,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-01,6,1,Testing,JIRA-739,Done,Low,2,98,2,3.5
+E010,Anita Rao,Engineering,Architect,Contractor,Pune,6,757,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-31,10,1,Architecture,JIRA-779,Done,High,4,93,3,3.5
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Bangalore,11,1657,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-12,9,0,Architecture,JIRA-374,Done,Critical,1,96,1,3.7
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Hyderabad,7,1252,M001,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-10,5,1,Support,JIRA-943,In Progress,Medium,5,99,1,3.8
+E002,Neha Verma,Engineering,Developer,Full-Time,Pune,5,1550,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-13,10,1,Architecture,JIRA-762,To Do,Medium,3,88,1,3.1
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Hyderabad,1,713,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-12,7,1,Development,JIRA-516,In Progress,Low,7,84,1,3.2
+E009,Suresh Kumar,Engineering,Developer,Contractor,Hyderabad,2,1087,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-03,7,1,Architecture,JIRA-925,Done,Medium,7,86,1,3.2
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Chennai,10,714,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-29,10,1,Development,JIRA-424,Done,Critical,8,87,2,4.8
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Chennai,1,1921,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-31,2,0,Support,JIRA-665,In Progress,High,6,83,4,4.7
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Chennai,5,784,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-01,6,0,Testing,JIRA-549,Done,High,7,81,2,4.7
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Chennai,12,1465,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-17,4,1,Development,JIRA-460,In Progress,High,8,80,0,4.3
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Bangalore,7,1009,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-20,7,0,Development,JIRA-261,To Do,Medium,7,90,3,4.0
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Chennai,4,772,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-12,7,0,Architecture,JIRA-997,In Progress,Medium,1,80,4,4.3
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Chennai,12,945,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-30,8,1,Support,JIRA-252,To Do,High,3,98,0,3.0
+E009,Suresh Kumar,Engineering,Developer,Contractor,Hyderabad,2,1059,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-19,5,1,Support,JIRA-864,In Progress,Critical,3,93,1,4.2
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Hyderabad,3,658,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-27,6,0,Architecture,JIRA-354,In Progress,Critical,2,80,3,3.3
+E006,Kavya Iyer,Engineering,Developer,Full-Time,Hyderabad,12,1466,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-13,3,0,Development,JIRA-153,In Progress,Medium,8,91,4,4.9
+E010,Anita Rao,Engineering,Architect,Contractor,Hyderabad,5,1408,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-01,4,0,Testing,JIRA-366,To Do,Critical,6,94,1,3.2
+E009,Suresh Kumar,Engineering,Developer,Contractor,Bangalore,6,690,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-10,9,1,Support,JIRA-540,In Progress,High,5,96,2,3.9
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Pune,9,1946,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-17,2,0,Testing,JIRA-155,To Do,Medium,1,95,2,3.3
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Bangalore,8,1330,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-08,9,1,Development,JIRA-966,Done,Medium,2,91,0,3.4
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Chennai,10,1958,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-23,2,0,Architecture,JIRA-178,To Do,Critical,2,90,0,3.6
+E002,Neha Verma,Engineering,Developer,Full-Time,Chennai,3,659,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-24,9,1,Architecture,JIRA-743,In Progress,Low,6,81,5,4.2
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Pune,1,1918,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-30,7,0,Development,JIRA-660,Done,Critical,2,92,2,3.4
+E007,Rohan Das,Support,Support Engineer,Full-Time,Pune,7,1424,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-02,4,0,Support,JIRA-602,In Progress,High,3,91,5,3.2
+E006,Kavya Iyer,Engineering,Developer,Contractor,Hyderabad,7,1575,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-13,8,0,Architecture,JIRA-930,In Progress,Medium,7,100,3,3.2
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Pune,8,1679,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-30,6,1,Architecture,JIRA-181,In Progress,High,3,84,5,4.8
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Bangalore,9,756,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-28,10,0,Architecture,JIRA-522,To Do,Critical,5,91,2,4.2
+E009,Suresh Kumar,Engineering,Developer,Contractor,Pune,3,1404,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-08,3,1,Support,JIRA-421,Done,Critical,8,99,2,3.7
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Chennai,11,817,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-12,10,0,Development,JIRA-504,To Do,Low,3,100,3,3.9
+E007,Rohan Das,Support,Support Engineer,Contractor,Chennai,10,1863,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-16,8,1,Development,JIRA-228,To Do,Low,4,83,0,4.4
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Pune,11,1095,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-14,10,0,Development,JIRA-408,In Progress,Medium,8,93,0,3.2
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Bangalore,8,1798,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-01,5,1,Architecture,JIRA-152,In Progress,Low,2,100,5,3.9
+E007,Rohan Das,Support,Support Engineer,Contractor,Bangalore,8,1418,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-17,10,1,Testing,JIRA-831,To Do,Low,7,98,2,4.1
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Bangalore,8,1875,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-26,9,1,Development,JIRA-265,In Progress,Medium,8,91,3,3.5
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Hyderabad,3,1200,M004,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-28,8,1,Architecture,JIRA-918,To Do,Medium,5,82,5,4.0
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Bangalore,7,1611,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-11,5,0,Development,JIRA-118,In Progress,High,6,85,1,4.7
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Chennai,7,833,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-21,3,0,Architecture,JIRA-364,In Progress,High,1,97,2,4.8
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Bangalore,8,1536,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-12,3,0,Development,JIRA-619,To Do,Medium,2,86,2,3.3
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Bangalore,3,1925,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-18,7,0,Development,JIRA-968,To Do,Critical,7,80,1,4.7
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Bangalore,5,1362,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-19,7,0,Testing,JIRA-871,Done,Critical,4,84,3,3.8
+E007,Rohan Das,Support,Support Engineer,Contractor,Bangalore,8,898,M001,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-30,10,0,Development,JIRA-446,In Progress,Critical,3,93,0,3.8
+E001,Amit Sharma,Engineering,Senior Developer,Full-Time,Chennai,7,1423,M003,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-27,7,1,Development,JIRA-946,In Progress,Medium,7,94,5,3.4
+E009,Suresh Kumar,Engineering,Developer,Contractor,Chennai,11,1428,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-20,6,0,Development,JIRA-650,In Progress,Critical,3,96,4,3.6
+E002,Neha Verma,Engineering,Developer,Contractor,Chennai,11,927,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-05,2,1,Testing,JIRA-952,In Progress,Critical,2,81,2,3.5
+E009,Suresh Kumar,Engineering,Developer,Full-Time,Bangalore,8,1210,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-08,9,1,Testing,JIRA-924,Done,Medium,6,89,2,4.3
+E010,Anita Rao,Engineering,Architect,Contractor,Pune,2,1271,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-15,7,1,Development,JIRA-250,Done,Critical,7,82,0,3.1
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Bangalore,6,1986,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-14,10,1,Support,JIRA-698,In Progress,Critical,8,95,5,4.9
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Hyderabad,12,1537,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-02,10,0,Testing,JIRA-566,In Progress,Low,3,97,2,4.8
+E002,Neha Verma,Engineering,Developer,Contractor,Bangalore,2,1356,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-24,2,0,Development,JIRA-480,In Progress,High,5,89,3,3.1
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Bangalore,5,1180,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-20,4,1,Development,JIRA-225,Done,High,2,81,3,4.0
+E005,Arjun Singh,Data Science,ML Engineer,Contractor,Hyderabad,8,1840,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-29,4,1,Architecture,JIRA-783,In Progress,Medium,6,82,4,4.3
+E007,Rohan Das,Support,Support Engineer,Contractor,Chennai,9,693,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-15,6,0,Testing,JIRA-824,To Do,High,2,100,4,3.2
+E010,Anita Rao,Engineering,Architect,Full-Time,Pune,8,1629,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-06,3,0,Development,JIRA-381,To Do,Medium,8,82,4,4.2
+E007,Rohan Das,Support,Support Engineer,Contractor,Bangalore,6,1495,M002,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-03,8,0,Support,JIRA-491,In Progress,Low,2,83,4,3.3
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Pune,5,1434,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-17,2,1,Testing,JIRA-127,Done,Low,5,92,0,3.6
+E007,Rohan Das,Support,Support Engineer,Contractor,Bangalore,1,1014,M002,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-17,5,1,Architecture,JIRA-217,In Progress,Low,6,94,4,3.8
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Bangalore,5,1734,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-27,5,0,Support,JIRA-681,In Progress,Critical,2,100,4,3.4
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Pune,9,1467,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-04,2,0,Architecture,JIRA-949,Done,High,3,80,0,4.9
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Hyderabad,6,1894,M002,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-08,10,1,Development,JIRA-265,Done,Low,5,82,3,4.4
+E003,Rahul Mehta,QA,QA Engineer,Contractor,Pune,10,1633,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-18,7,1,Architecture,JIRA-379,To Do,High,6,86,3,4.9
+E006,Kavya Iyer,Engineering,Developer,Full-Time,Bangalore,10,1575,M001,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-28,2,0,Architecture,JIRA-669,Done,Critical,7,97,0,4.6
+E002,Neha Verma,Engineering,Developer,Contractor,Bangalore,6,1370,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-02,8,0,Development,JIRA-227,In Progress,High,4,94,0,3.4
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Pune,2,1856,M003,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-13,5,0,Architecture,JIRA-471,To Do,High,8,99,1,3.0
+E007,Rohan Das,Support,Support Engineer,Contractor,Hyderabad,3,1730,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-04-25,4,0,Testing,JIRA-863,To Do,Medium,5,98,1,4.8
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Chennai,11,1747,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-24,2,1,Development,JIRA-974,In Progress,Critical,7,88,0,4.4
+E008,Meera Joshi,Support,Senior Support Engineer,Full-Time,Pune,1,1169,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-24,10,1,Support,JIRA-105,In Progress,Medium,6,82,4,4.6
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Pune,3,1274,M003,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-05,3,0,Development,JIRA-591,In Progress,Low,6,88,1,3.2
+E004,Priya Nair,Engineering,Lead Developer,Full-Time,Chennai,9,1084,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-23,9,0,Architecture,JIRA-692,To Do,Low,1,81,3,3.6
+E002,Neha Verma,Engineering,Developer,Contractor,Bangalore,5,1850,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-04,3,0,Development,JIRA-672,To Do,High,7,92,0,4.2
+E007,Rohan Das,Support,Support Engineer,Full-Time,Hyderabad,7,1550,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-04-25,3,1,Development,JIRA-564,Done,High,4,83,0,3.0
+E002,Neha Verma,Engineering,Developer,Full-Time,Pune,11,1642,M003,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-04-20,7,1,Architecture,JIRA-842,Done,Critical,3,87,1,4.6
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Chennai,5,1795,M002,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-20,4,1,Support,JIRA-717,In Progress,High,6,80,4,4.2
+E003,Rahul Mehta,QA,QA Engineer,Full-Time,Hyderabad,6,1000,M002,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-16,5,0,Support,JIRA-293,Done,Critical,8,99,5,3.7
+E010,Anita Rao,Engineering,Architect,Contractor,Hyderabad,6,932,M001,P05,Cloud Migration,TechGlobal,T&M,2024-01-01,2024-12-31,700,3200,2024-03-22,9,0,Architecture,JIRA-324,To Do,Medium,4,94,4,3.4
+E008,Meera Joshi,Support,Senior Support Engineer,Contractor,Pune,7,977,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-21,7,0,Development,JIRA-466,To Do,Low,3,89,3,3.4
+E010,Anita Rao,Engineering,Architect,Full-Time,Pune,4,1181,M002,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-03-03,5,1,Testing,JIRA-447,Done,Medium,3,86,0,3.4
+E005,Arjun Singh,Data Science,ML Engineer,Full-Time,Hyderabad,11,827,M003,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-02,5,1,Architecture,JIRA-345,In Progress,High,3,96,4,4.8
+E002,Neha Verma,Engineering,Developer,Full-Time,Pune,4,1690,M004,P01,Digital Banking,ABC Bank,Fixed,2024-01-01,2024-12-31,800,2500,2024-03-10,7,1,Architecture,JIRA-751,To Do,Low,4,97,2,4.6
+E006,Kavya Iyer,Engineering,Developer,Contractor,Pune,9,1796,M004,P02,ERP Rollout,XYZ Corp,T&M,2024-01-01,2024-12-31,600,3000,2024-03-04,5,0,Architecture,JIRA-909,Done,Low,3,96,3,4.5
+E009,Suresh Kumar,Engineering,Developer,Contractor,Pune,6,1365,M004,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-01,9,1,Support,JIRA-695,In Progress,Low,4,87,1,3.9
+E004,Priya Nair,Engineering,Lead Developer,Contractor,Hyderabad,7,1770,M002,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-03-14,7,1,Development,JIRA-237,To Do,High,8,96,2,3.5
+E001,Amit Sharma,Engineering,Senior Developer,Contractor,Hyderabad,8,1557,M004,P04,AI Modernization,FinTechX,Fixed,2024-01-01,2024-12-31,300,4000,2024-04-02,8,1,Architecture,JIRA-424,In Progress,Critical,1,85,3,3.5
+E002,Neha Verma,Engineering,Developer,Full-Time,Chennai,9,1650,M001,P03,Support Transformation,RetailCo,Fixed,2024-01-01,2024-12-31,400,1800,2024-04-27,6,0,Development,JIRA-221,To Do,High,1,97,1,3.7
