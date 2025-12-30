@@ -29,12 +29,25 @@
 
 
 import os
-from groq import Groq
 from dotenv import load_dotenv
+from groq import Groq
 
-# Load .env only locally
+# Load .env locally (Streamlit ignores it anyway)
 load_dotenv()
 
+# -----------------------------------------
+# 🔥 FORCE REMOVE PROXIES (CRITICAL)
+# -----------------------------------------
+for proxy_var in [
+    "HTTP_PROXY", "HTTPS_PROXY",
+    "http_proxy", "https_proxy",
+    "ALL_PROXY"
+]:
+    os.environ.pop(proxy_var, None)
+
+# -----------------------------------------
+# LLM FUNCTION
+# -----------------------------------------
 def explain_insight(prompt: str) -> str:
     try:
         api_key = os.getenv("GROQ_API_KEY")
@@ -46,9 +59,7 @@ def explain_insight(prompt: str) -> str:
 
         response = client.chat.completions.create(
             model="llama-3.1-8b-instant",
-            messages=[
-                {"role": "user", "content": prompt}
-            ],
+            messages=[{"role": "user", "content": prompt}],
             temperature=0.2,
             timeout=20
         )
