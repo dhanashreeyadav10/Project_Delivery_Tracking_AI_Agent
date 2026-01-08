@@ -1,16 +1,11 @@
 import streamlit as st
 import pandas as pd
-import io
-import re
 import tempfile
 
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.pagesizes import A4
 
-# ===============================
-# INTERNAL IMPORTS
-# ===============================
 from models import (
     utilization_model,
     delivery_risk_model,
@@ -32,37 +27,23 @@ st.set_page_config(
 # ===============================
 # HEADER
 # ===============================
-st.markdown(
-    """
-    <style>
-    .header-title {
-        font-size: 36px;
-        font-weight: 700;
-    }
-    .header-subtitle {
-        color: #6b7280;
-        font-size: 16px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+st.markdown("""
+<style>
+.header-title { font-size:36px; font-weight:700; }
+.header-subtitle { color:#6b7280; font-size:16px; }
+</style>
+""", unsafe_allow_html=True)
 
-col1, col2 = st.columns([1, 7])
-
-# with col1:
-    # st.image("compunnel_logo.jpg", width=140)
-
-with col2:
-    st.markdown(
-        """
-        <div class="header-title">Agentic AI – Project & Delivery Intelligence</div>
-        <div class="header-subtitle">
-            Enterprise-grade utilization, delivery risk, cost & HR intelligence
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+c1, c2 = st.columns([1, 7])
+with c1:
+    # st.image("assets/compunnel_logo.png", width=140)
+with c2:
+    st.markdown("""
+    <div class="header-title">Agentic AI – Project & Delivery Intelligence</div>
+    <div class="header-subtitle">
+        Enterprise-grade utilization, delivery risk, cost & HR intelligence
+    </div>
+    """, unsafe_allow_html=True)
 
 st.divider()
 
@@ -85,7 +66,7 @@ role = st.sidebar.radio(
 use_llm = st.sidebar.checkbox("Generate Executive AI Summary")
 
 # ===============================
-# REQUIRED COLUMNS
+# LOAD DATA
 # ===============================
 REQUIRED_COLS = [
     "employee_id","employee_name","department","designation",
@@ -97,19 +78,12 @@ REQUIRED_COLS = [
     "story_points","attendance_pct","leave_days","performance_rating"
 ]
 
-# ===============================
-# LOAD DATA
-# ===============================
 def load_data(file):
     if not file:
-        st.warning("Please upload a data file to proceed.")
+        st.warning("Please upload a file to proceed.")
         st.stop()
 
-    if file.name.endswith(".csv"):
-        df = pd.read_csv(file)
-    else:
-        df = pd.read_excel(file)
-
+    df = pd.read_csv(file) if file.name.endswith(".csv") else pd.read_excel(file)
     df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
 
     missing = set(REQUIRED_COLS) - set(df.columns)
@@ -117,20 +91,12 @@ def load_data(file):
         st.error(f"Missing required columns: {list(missing)}")
         st.stop()
 
-    numeric_cols = [
-        "hours_logged","cost_per_hour","billing_rate",
-        "attendance_pct","leave_days","performance_rating",
-        "experience_years","story_points","planned_hours"
-    ]
-    for col in numeric_cols:
-        df[col] = pd.to_numeric(df[col], errors="coerce")
-
     return df
 
 data = load_data(uploaded_file)
 
 # ===============================
-# RUN MODELS
+# MODELS
 # ===============================
 util_df = utilization_model(data)
 risk_df = delivery_risk_model(data)
@@ -147,9 +113,12 @@ def load_orchestrator():
 orchestrator = load_orchestrator()
 
 # ===============================
-# PDF REPORT
+# SAFE PDF GENERATOR
 # ===============================
-def generate_pdf(summary, kpis):
+def generate_pdf(summary_text: str, kpis: dict):
+    if not summary_text:
+        summary_text = "No executive summary available."
+
     tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
     doc = SimpleDocTemplate(tmp.name, pagesize=A4)
     styles = getSampleStyleSheet()
@@ -160,7 +129,7 @@ def generate_pdf(summary, kpis):
         Paragraph(f"Delivery Risk Health: {kpis['risk']}%", styles["Normal"]),
         Paragraph(f"Margin Health: {kpis['margin']}%", styles["Normal"]),
         Paragraph("<br/><b>Executive Summary</b>", styles["Heading2"]),
-        Paragraph(summary, styles["Normal"]),
+        Paragraph(summary_text, styles["Normal"]),
     ]
 
     doc.build(content)
@@ -175,14 +144,30 @@ if st.button("🚀 Run AI Analysis"):
     )
 
     # -----------------------------
-    # KPI CALCULATIONS (CORRECT)
+    # GUARANTEE EXPLANATION STRING
+    # -----------------------------
+    explanation = result.get("explanation")
+    if not explanation or not isinstance(explanation, str):
+        explanation = (
+            "Key Insights:\n"
+            f"• Underutilized Employees: {len(result['low_util'])}\n"
+            f"• Delivery Risk Projects: {len(result['risk_projects'])}\n"
+            f"• Loss-Making Projects: {len(result['loss_projects'])}\n"
+            f"• HR Risk Employees: {len(result['hr_risks'])}\n\n"
+            "Recommended Actions:\n"
+            "• Optimize bench utilization\n"
+            "• Prioritize high-risk Jira tickets\n"
+            "• Review project cost overruns\n"
+            "• Engage HR for early risk mitigation"
+        )
+
+    # -----------------------------
+    # KPI CALCULATION (CORRECT)
     # -----------------------------
     total_employees = util_df["employee_id"].nunique()
     underutilized = util_df[util_df["utilization_pct"] < 60]["employee_id"].nunique()
-
     total_projects = risk_df["project_id"].nunique()
     risky_projects = risk_df[risk_df["risk_flag"] == 1]["project_id"].nunique()
-
     loss_projects = cost_df[cost_df["margin"] < 0]["project_id"].nunique()
 
     util_kpi = round(((total_employees - underutilized) / total_employees) * 100, 1)
@@ -193,39 +178,32 @@ if st.button("🚀 Run AI Analysis"):
     # KPI DISPLAY
     # -----------------------------
     st.markdown("### 📊 Executive KPIs")
-    c1, c2, c3 = st.columns(3)
-    c1.metric("Utilization Health %", f"{util_kpi}%")
-    c2.metric("Delivery Risk Health %", f"{risk_kpi}%")
-    c3.metric("Margin Health %", f"{margin_kpi}%")
+    k1, k2, k3 = st.columns(3)
+    k1.metric("Utilization Health %", f"{util_kpi}%")
+    k2.metric("Delivery Risk Health %", f"{risk_kpi}%")
+    k3.metric("Margin Health %", f"{margin_kpi}%")
 
     st.divider()
 
     # -----------------------------
-    # ROLE-BASED VIEWS
+    # ROLE-BASED VIEW
     # -----------------------------
     if role == "Delivery Head":
-        st.subheader("🚨 Delivery Risk Projects")
         st.dataframe(result["risk_projects"], use_container_width=True)
-
-        st.subheader("📉 Underutilized Employees")
         st.dataframe(result["low_util"], use_container_width=True)
-
     elif role == "HR":
-        st.subheader("⚠️ HR Risk Employees")
         st.dataframe(result["hr_risks"], use_container_width=True)
-
-    elif role == "Finance":
-        st.subheader("💰 Loss / Margin Risk Projects")
+    else:
         st.dataframe(result["loss_projects"], use_container_width=True)
 
     # -----------------------------
-    # EXECUTIVE SUMMARY (SAFE)
+    # EXECUTIVE SUMMARY
     # -----------------------------
     st.subheader("🧠 Executive AI Summary")
-    st.success(result["explanation"])
+    st.success(explanation)
 
     pdf_path = generate_pdf(
-        result["explanation"],
+        explanation,
         {"util": util_kpi, "risk": risk_kpi, "margin": margin_kpi}
     )
 
@@ -247,26 +225,18 @@ question = st.text_input("Ask about utilization, delivery risk, HR or margin")
 
 if st.button("🧠 Get Answer"):
     if question.strip():
-        answer = answer_question(
+        st.success(answer_question(
             question, util_df, risk_df, cost_df, hr_df
-        )
-        st.success(answer)
+        ))
     else:
         st.warning("Please enter a question.")
 
 # ===============================
 # FOOTER
 # ===============================
-st.markdown(
-    """
-    <hr>
-    <div style="text-align:center; color:gray; font-size:13px;">
-        © 2026 Compunnel Digital | Agentic AI – Delivery Intelligence Platform
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-
-
-
+st.markdown("""
+<hr>
+<div style="text-align:center; color:gray; font-size:13px;">
+© 2026 Compunnel Digital | Agentic AI – Delivery Intelligence Platform
+</div>
+""", unsafe_allow_html=True)
