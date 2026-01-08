@@ -23,7 +23,7 @@ class Orchestrator:
                 Loss-Making Projects: {len(loss)}
                 HR Risk Employees: {len(hr)}
 
-                Provide executive insights and recommendations.
+                Provide executive insights and actions.
                 """
             )
 
