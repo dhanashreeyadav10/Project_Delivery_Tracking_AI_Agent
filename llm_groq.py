@@ -1,7 +1,6 @@
 import os
 import httpx
 
-
 def explain_insight(prompt: str) -> str:
     api_key = os.getenv("GROQ_API_KEY")
 
@@ -19,29 +18,21 @@ def explain_insight(prompt: str) -> str:
                 json={
                     "model": "llama-3.1-8b-instant",
                     "messages": [
-                        {
-                            "role": "system",
-                            "content": (
-                                "You are a senior enterprise delivery, HR, and finance intelligence advisor. "
-                                "Respond with clear insights, impact, and actions."
-                            )
-                        },
+                        {"role": "system", "content": "You are an enterprise intelligence advisor."},
                         {"role": "user", "content": prompt}
                     ],
                     "temperature": 0.2,
                 },
             )
 
-        # ---------- HARD VALIDATION ----------
         if response.status_code != 200:
             return f"❌ LLM Error: HTTP {response.status_code} – {response.text}"
 
-        payload = response.json()
+        data = response.json()
+        if "choices" not in data:
+            return f"❌ LLM Error: Invalid response → {data}"
 
-        if "choices" not in payload:
-            return f"❌ LLM Error: Invalid response format → {payload}"
-
-        return payload["choices"][0]["message"]["content"]
+        return data["choices"][0]["message"]["content"]
 
     except Exception as e:
-        return f"❌ LLM Exception: {str(e)}"
+        return f"❌ LLM Exception: {e}"
