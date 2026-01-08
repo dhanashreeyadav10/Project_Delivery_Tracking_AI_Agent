@@ -1,4 +1,3 @@
-import pandas as pd
 from llm_groq import explain_insight
 
 def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
@@ -27,10 +26,10 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
     # EMPLOYEE UTILIZATION
     # ------------------------------------------------
     if "utilization" in q or "bench" in q or "under" in q:
-        data_u = util_df[util_df["utilization_pct"] < 60]
+        low_emp = util_df[util_df["utilization_pct"] < 60]
 
         response = "Underutilized Employees (Top 10):\n\n"
-        for _, r in data_u.sort_values("utilization_pct").head(10).iterrows():
+        for _, r in low_emp.sort_values("utilization_pct").head(10).iterrows():
             response += f"- {r['employee_id']} | {r['utilization_pct']:.1f}% utilization\n"
 
         return response
@@ -72,7 +71,7 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
         return response
 
     # ------------------------------------------------
-    # FALLBACK (OPTIONAL LLM)
+    # FALLBACK
     # ------------------------------------------------
     llm_answer = explain_insight(question)
     return llm_answer or "Please ask about teams, utilization, delivery risk, HR, or margin."
