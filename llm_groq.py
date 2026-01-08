@@ -1,14 +1,15 @@
 import os
 import httpx
 
-def explain_insight(prompt: str) -> str | None:
+def explain_insight(prompt: str) -> str:
     api_key = os.getenv("GROQ_API_KEY")
 
     if not api_key:
-        return None
+        return "LLM unavailable: GROQ_API_KEY not set"
 
     try:
-        with httpx.Client(timeout=15, trust_env=False) as client:
+        # IMPORTANT: trust_env=False disables Streamlit proxies
+        with httpx.Client(timeout=20, trust_env=False) as client:
             response = client.post(
                 "https://api.groq.com/openai/v1/chat/completions",
                 headers={
@@ -17,11 +18,18 @@ def explain_insight(prompt: str) -> str | None:
                 },
                 json={
                     "model": "llama-3.1-8b-instant",
-                    "messages": [{"role": "user", "content": prompt}],
+                    "messages": [
+                        {"role": "user", "content": prompt}
+                    ],
                     "temperature": 0.2,
                 },
             )
+
         response.raise_for_status()
         return response.json()["choices"][0]["message"]["content"]
-    except Exception:
-        return None
+
+    except Exception as e:
+        return f"LLM unavailable: {e}"
+
+    except Exception as e:
+        return f"LLM unavailable: {e}"
