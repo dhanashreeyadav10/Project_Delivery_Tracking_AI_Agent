@@ -1,17 +1,3 @@
-# import pandas as pd
-
-# def utilization_model(timesheets: pd.DataFrame) -> pd.DataFrame:
-#     util = timesheets.groupby("employee_id")["hours"].sum().reset_index()
-#     util["utilization"] = util["hours"] / 160
-#     return util
-
-# def delay_risk_model(projects: pd.DataFrame, timesheets: pd.DataFrame) -> pd.DataFrame:
-#     project_hours = timesheets.groupby("project_id")["hours"].sum().reset_index()
-#     df = projects.merge(project_hours, on="project_id", how="left").fillna(0)
-#     df["risk"] = (df["hours"] > df["planned_days"] * 8).astype(int)
-#     return df[["project_id", "hours", "planned_days", "risk"]]
-
-
 
 import pandas as pd
 
@@ -134,3 +120,4 @@ def hr_health_model(df: pd.DataFrame) -> pd.DataFrame:
     ).astype(int)
 
     return hr
+
