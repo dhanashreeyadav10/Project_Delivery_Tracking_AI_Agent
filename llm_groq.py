@@ -1,14 +1,14 @@
 import os
 import httpx
 
-def explain_insight(prompt: str) -> str:
+def explain_insight(prompt: str) -> str | None:
     api_key = os.getenv("GROQ_API_KEY")
 
     if not api_key:
-        return None  # IMPORTANT: silent fail
+        return None
 
     try:
-        with httpx.Client(timeout=20, trust_env=False) as client:
+        with httpx.Client(timeout=15, trust_env=False) as client:
             response = client.post(
                 "https://api.groq.com/openai/v1/chat/completions",
                 headers={
@@ -21,9 +21,7 @@ def explain_insight(prompt: str) -> str:
                     "temperature": 0.2,
                 },
             )
-
         response.raise_for_status()
         return response.json()["choices"][0]["message"]["content"]
-
     except Exception:
-        return None  # NEVER crash app
+        return None
