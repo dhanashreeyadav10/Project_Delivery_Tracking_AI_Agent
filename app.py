@@ -7,6 +7,9 @@ st.set_page_config(
     page_title="Agentic AI – Delivery Intelligence | Compunnel",
     layout="wide"
 )
+import os
+st.sidebar.write("GROQ KEY LOADED:", bool(os.getenv("GROQ_API_KEY")))
+
 
 # =========================================================
 # IMPORTS (SAFE AFTER PAGE CONFIG)
@@ -154,3 +157,4 @@ if st.button("🧠 Get Answer"):
             question, util_df, risk_df, cost_df, hr_df
         )
     st.success(answer)
+
