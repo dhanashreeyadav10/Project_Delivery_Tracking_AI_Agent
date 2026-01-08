@@ -1,69 +1,146 @@
-from llm_groq import explain_insight
+import streamlit as st
 import pandas as pd
+import io
+import re
 
-def answer_question(question, util_df, risk_df, cost_df, hr_df):
-    q = question.lower()
+from models import (
+    utilization_model,
+    delivery_risk_model,
+    cost_margin_model,
+    hr_health_model
+)
+from orchestrator import Orchestrator
+from qa_bot import answer_question
 
-    # -----------------------------
-    # ATTRITION / HR RISK (TABULAR)
-    # -----------------------------
-    if "leave" in q or "attrition" in q:
-        risky = hr_df[hr_df["hr_risk"] == 1]
+st.set_page_config(
+    page_title="🧠 Agentic AI – Project & Delivery Tracking",
+    layout="wide"
+)
 
-        if risky.empty:
-            return "✅ No immediate attrition risks detected based on attendance and performance trends."
+st.title("🧠 Agentic AI – Project & Delivery Intelligence")
 
-        # Ensure safe merge
-        output = risky.copy()
-        output["employee_id"] = output["employee_id"].astype(str)
+# ===============================
+# FILE UPLOAD
+# ===============================
+st.sidebar.header("📂 Upload Data")
+uploaded_file = st.sidebar.file_uploader(
+    "Upload Delivery Data (Excel / CSV / TXT / PDF)",
+    type=["xlsx", "csv", "txt", "pdf"]
+)
 
-        return output[[
-            "employee_id",
-            "avg_attendance",
-            "avg_rating"
-        ]].rename(columns={
-            "avg_attendance": "Attendance %",
-            "avg_rating": "Performance Rating"
-        })
+REQUIRED_COLS = [
+    "employee_id", "employee_name", "department", "designation",
+    "employment_type", "location", "experience_years", "cost_per_hour",
+    "manager_id", "project_id", "project_name", "client_name",
+    "project_type", "start_date", "end_date", "planned_hours",
+    "billing_rate", "work_date", "hours_logged", "billable",
+    "task_type", "jira_ticket", "ticket_status", "priority",
+    "story_points", "attendance_pct", "leave_days", "performance_rating"
+]
 
-    # -----------------------------
-    # UTILIZATION / BENCH
-    # -----------------------------
-    if "utilization" in q or "bench" in q:
-        data = util_df[util_df["utilization_pct"] < 60]
-        summary = f"{len(data)} employees are underutilized."
+# ===============================
+# FILE PARSERS (UNCHANGED)
+# ===============================
+def parse_excel(file_bytes):
+    return pd.read_excel(io.BytesIO(file_bytes))
 
-    # -----------------------------
-    # DELIVERY RISK
-    # -----------------------------
-    elif "risk" in q or "delay" in q:
-        data = risk_df[risk_df["risk_flag"] == 1]
-        summary = f"{len(data)} projects are at delivery risk."
+def parse_csv_txt(file_bytes):
+    import chardet
+    encoding = chardet.detect(file_bytes).get("encoding", "utf-8")
+    text = file_bytes.decode(encoding, errors="ignore")
 
-    # -----------------------------
-    # COST / MARGIN
-    # -----------------------------
-    elif "cost" in q or "margin" in q or "loss" in q:
-        data = cost_df[cost_df["margin"] < 0]
-        summary = f"{len(data)} projects are loss-making."
+    lines = [l.strip() for l in text.splitlines() if l.strip()]
+    sample = lines[1]
+    for d in [",", ";", "\t", "|"]:
+        if sample.count(d) >= 5:
+            return pd.read_csv(io.StringIO(text), sep=d)
+    raise ValueError("Unable to detect delimiter")
 
+def parse_pdf(file_bytes):
+    import pdfplumber
+    rows = []
+    with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
+        for page in pdf.pages:
+            text = page.extract_text()
+            if not text:
+                continue
+            for line in text.split("\n"):
+                parts = re.split(r"[,\s]+", line.strip())
+                if len(parts) >= len(REQUIRED_COLS):
+                    rows.append(parts[:len(REQUIRED_COLS)])
+    return pd.DataFrame(rows, columns=REQUIRED_COLS)
+
+# ===============================
+# SAFE LOADER (NO st.stop)
+# ===============================
+def load_uploaded_data(file):
+    if file is None:
+        return None
+
+    try:
+        ext = file.name.lower().split(".")[-1]
+        file_bytes = file.getvalue()
+
+        if ext == "xlsx":
+            df = parse_excel(file_bytes)
+        elif ext in ["csv", "txt"]:
+            df = parse_csv_txt(file_bytes)
+        elif ext == "pdf":
+            df = parse_pdf(file_bytes)
+        else:
+            st.error("Unsupported file format")
+            return None
+
+        df.columns = (
+            df.columns.astype(str)
+            .str.strip().str.lower()
+            .str.replace(" ", "_")
+        )
+
+        missing = set(REQUIRED_COLS) - set(df.columns)
+        if missing:
+            st.error(f"Missing required columns: {list(missing)}")
+            return None
+
+        return df
+
+    except Exception as e:
+        st.error("Failed to parse file")
+        st.code(str(e))
+        return None
+
+# ===============================
+# LOAD DATA
+# ===============================
+data = load_uploaded_data(uploaded_file)
+
+if data is not None:
+    util_df = utilization_model(data)
+    risk_df = delivery_risk_model(data)
+    cost_df = cost_margin_model(data)
+    hr_df = hr_health_model(data)
+
+# ===============================
+# CHATBOT
+# ===============================
+st.markdown("---")
+st.subheader("🤖 Ask Delivery Intelligence Bot")
+
+question = st.text_input(
+    "Ask about utilization, delivery risk, HR, margin, etc.",
+    disabled=data is None
+)
+
+if st.button("🧠 Get Answer", disabled=data is None):
+    result = answer_question(
+        question,
+        util_df,
+        risk_df,
+        cost_df,
+        hr_df
+    )
+
+    if isinstance(result, pd.DataFrame):
+        st.dataframe(result, use_container_width=True)
     else:
-        summary = "Overall delivery, HR, and financial health overview."
-        data = None
-
-    prompt = f"""
-    You are a senior enterprise delivery leader.
-
-    Question:
-    {question}
-
-    Insight:
-    {summary}
-
-    Provide:
-    - Why this matters
-    - Business impact
-    - Clear recommendations
-    """
-
-    return explain_insight(prompt)
+        st.success(result)
