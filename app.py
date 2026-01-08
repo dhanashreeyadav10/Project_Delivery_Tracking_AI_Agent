@@ -16,14 +16,41 @@ from orchestrator import Orchestrator
 from qa_bot import answer_question
 
 # ===============================
+# ===============================
 # PAGE CONFIG
 # ===============================
 st.set_page_config(
-    page_title="🧠 Agentic AI – Project & Delivery Tracking",
+    page_title="Agentic AI – Project & Delivery Intelligence",
+    page_icon="🧠",
     layout="wide"
 )
 
-st.title("🧠 Agentic AI – Project & Delivery Intelligence")
+# ===============================
+# TOP HEADER (LOGO + TITLE)
+# ===============================
+header_col1, header_col2 = st.columns([1, 6])
+
+with header_col1:
+    st.image(
+        "assets/compunnel_logo.png",
+        width=160
+    )
+
+with header_col2:
+    st.markdown(
+        """
+        <div style="padding-top:10px">
+            <h1 style="margin-bottom:0px;">Agentic AI – Project & Delivery Intelligence</h1>
+            <p style="color:gray; margin-top:4px;">
+                Enterprise-grade utilization, delivery risk, cost & HR intelligence
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+st.markdown("---")
+
 
 # ===============================
 # FILE UPLOAD
@@ -225,4 +252,5 @@ if st.button("🧠 Get Answer"):
                 hr_df
             )
         st.success(answer)
+
 
