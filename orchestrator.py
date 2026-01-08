@@ -1,37 +1,3 @@
-# from agents import UtilizationAgent, DelayRiskAgent, BillingLeakageAgent
-# from llm_groq import explain_insight
-
-# class Orchestrator:
-#     def __init__(self):
-#         self.util_agent = UtilizationAgent()
-#         self.risk_agent = DelayRiskAgent()
-#         self.billing_agent = BillingLeakageAgent()
-
-#     def analyze(self, util_df, risk_df, timesheets, use_llm=False):
-#         low_util = self.util_agent.run(util_df)
-#         risks = self.risk_agent.run(risk_df)
-#         leakage = self.billing_agent.run(timesheets)
-
-#         explanation = None
-#         if use_llm:
-#             prompt = f"""
-#             Project Delivery Summary:
-#             - Low Utilization Employees: {len(low_util)}
-#             - High Risk Projects: {len(risks)}
-#             - Billing Leakage Records: {len(leakage)}
-#             Provide executive insights and actions.
-#             """
-#             explanation = explain_insight(prompt)
-
-#         return {
-#             "low_util": low_util,
-#             "risks": risks,
-#             "leakage": leakage,
-#             "explanation": explanation
-#         }
-
-
-
 
 from agents import (
     UtilizationAgent,
@@ -91,3 +57,4 @@ class Orchestrator:
             "hr_risks": hr_risks,
             "explanation": explanation
         }
+
