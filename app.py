@@ -2,6 +2,11 @@ import streamlit as st
 import pandas as pd
 import io
 import re
+import tempfile
+
+from reportlab.platypus import SimpleDocTemplate, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.pagesizes import A4
 
 # ===============================
 # INTERNAL IMPORTS
@@ -16,7 +21,6 @@ from orchestrator import Orchestrator
 from qa_bot import answer_question
 
 # ===============================
-# ===============================
 # PAGE CONFIG
 # ===============================
 st.set_page_config(
@@ -26,41 +30,77 @@ st.set_page_config(
 )
 
 # ===============================
-# TOP HEADER (LOGO + TITLE)
+# PROFESSIONAL HEADER
 # ===============================
-header_col1, header_col2 = st.columns([1, 6])
+st.markdown(
+    """
+    <style>
+    .header-container {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 10px 0 20px 0;
+    }
+    .header-title {
+        font-size: 38px;
+        font-weight: 700;
+    }
+    .header-subtitle {
+        color: #6b7280;
+        font-size: 16px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-with header_col1:
-    st.image(
-        "compunnel_logo.jpg",
-        width=160
-    )
+col1, col2 = st.columns([1, 7])
 
-with header_col2:
+with col1:
+    st.image("assets/compunnel_logo.png", width=140)
+
+with col2:
     st.markdown(
         """
-        <div style="padding-top:10px">
-            <h1 style="margin-bottom:0px;">Agentic AI – Project & Delivery Intelligence</h1>
-            <p style="color:gray; margin-top:4px;">
-                Enterprise-grade utilization, delivery risk, cost & HR intelligence
-            </p>
+        <div class="header-container">
+            <div>
+                <div class="header-title">
+                    Agentic AI – Project & Delivery Intelligence
+                </div>
+                <div class="header-subtitle">
+                    Enterprise-grade utilization, delivery risk, cost & HR intelligence
+                </div>
+            </div>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-st.markdown("---")
-
+st.divider()
 
 # ===============================
-# FILE UPLOAD
+# SIDEBAR
 # ===============================
+st.sidebar.image("assets/compunnel_logo.png", width=180)
+st.sidebar.markdown("---")
+
 st.sidebar.header("📂 Upload Data")
 uploaded_file = st.sidebar.file_uploader(
     "Upload Delivery Data (Excel / CSV / TXT / PDF)",
     type=["xlsx", "csv", "txt", "pdf"]
 )
 
+st.sidebar.header("🧑‍💼 Role View")
+role = st.sidebar.radio(
+    "Select Role",
+    ["Delivery Head", "HR", "Finance"]
+)
+
+use_llm = st.sidebar.checkbox("Generate Executive AI Summary")
+
+# ===============================
+# REQUIRED COLUMNS
+# ===============================
 REQUIRED_COLS = [
     "employee_id", "employee_name", "department", "designation",
     "employment_type", "location", "experience_years", "cost_per_hour",
@@ -77,40 +117,15 @@ REQUIRED_COLS = [
 def parse_excel(file_bytes):
     return pd.read_excel(io.BytesIO(file_bytes))
 
-
 def parse_csv_txt(file_bytes):
     import chardet
     encoding = chardet.detect(file_bytes).get("encoding", "utf-8")
     text = file_bytes.decode(encoding, errors="ignore")
-
-    lines = [l.strip() for l in text.splitlines() if l.strip()]
-    if len(lines) < 2:
-        raise ValueError("File has no data rows")
-
-    sample = lines[1]
-    delimiter = None
-    for d in [",", ";", "\t", "|"]:
-        if sample.count(d) >= 5:
-            delimiter = d
-            break
-    if delimiter is None:
-        raise ValueError("Unable to detect delimiter")
-
-    header = lines[0].split(delimiter)
-    if len(header) < len(REQUIRED_COLS):
-        st.warning("⚠️ Malformed header detected. Auto-repairing.")
-        header_line = delimiter.join(REQUIRED_COLS)
-        csv_text = "\n".join([header_line] + lines[1:])
-    else:
-        csv_text = "\n".join(lines)
-
-    df = pd.read_csv(io.StringIO(csv_text), sep=delimiter, engine="python")
+    df = pd.read_csv(io.StringIO(text))
     return df
-
 
 def parse_pdf(file_bytes):
     import pdfplumber
-
     rows = []
     with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
         for page in pdf.pages:
@@ -121,52 +136,36 @@ def parse_pdf(file_bytes):
                 parts = re.split(r"[,\s]+", line.strip())
                 if len(parts) >= len(REQUIRED_COLS):
                     rows.append(parts[:len(REQUIRED_COLS)])
-
-    if not rows:
-        raise ValueError("No usable tabular data found in PDF")
-
     return pd.DataFrame(rows, columns=REQUIRED_COLS)
 
 # ===============================
-# STRICT LOADER (NO FALLBACK)
+# LOAD DATA
 # ===============================
 def load_uploaded_data(file):
-    if file is None:
+    if not file:
         st.warning("Please upload a file to proceed.")
         st.stop()
 
-    file_bytes = file.getvalue()
     ext = file.name.lower().split(".")[-1]
+    file_bytes = file.getvalue()
 
-    try:
-        if ext == "xlsx":
-            df = parse_excel(file_bytes)
-        elif ext in ["csv", "txt"]:
-            df = parse_csv_txt(file_bytes)
-        elif ext == "pdf":
-            df = parse_pdf(file_bytes)
-        else:
-            st.error("Unsupported file format")
-            st.stop()
-    except Exception as e:
-        st.error("❌ Failed to parse uploaded file")
-        st.code(str(e))
+    if ext == "xlsx":
+        df = parse_excel(file_bytes)
+    elif ext in ["csv", "txt"]:
+        df = parse_csv_txt(file_bytes)
+    elif ext == "pdf":
+        df = parse_pdf(file_bytes)
+    else:
+        st.error("Unsupported file format")
         st.stop()
 
-    # Normalize column names
-    df.columns = (
-        df.columns.astype(str)
-        .str.strip().str.lower()
-        .str.replace(" ", "_")
-    )
+    df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
 
     missing = set(REQUIRED_COLS) - set(df.columns)
     if missing:
-        st.error("❌ Required columns missing")
-        st.write("Missing columns:", list(missing))
+        st.error(f"Missing required columns: {list(missing)}")
         st.stop()
 
-    # Convert numerics
     numeric_cols = [
         "hours_logged", "cost_per_hour", "billing_rate",
         "attendance_pct", "leave_days", "performance_rating",
@@ -175,17 +174,13 @@ def load_uploaded_data(file):
     for col in numeric_cols:
         df[col] = pd.to_numeric(df[col], errors="coerce")
 
-    st.success("✅ Uploaded data validated successfully")
-    st.write("Detected columns:", list(df.columns))
+    st.success("✅ Data validated successfully")
     return df
 
-# ===============================
-# LOAD DATA
-# ===============================
 data = load_uploaded_data(uploaded_file)
 
 # ===============================
-# RUN MODELS
+# MODELS
 # ===============================
 util_df = utilization_model(data)
 risk_df = delivery_risk_model(data)
@@ -202,56 +197,103 @@ def load_orchestrator():
 orchestrator = load_orchestrator()
 
 # ===============================
-# ANALYSIS DASHBOARD
+# PDF REPORT
 # ===============================
-st.sidebar.header("⚙️ Controls")
-use_llm = st.sidebar.checkbox("Generate Executive AI Summary (LLM)")
+def generate_pdf_report(kpis, summary):
+    temp = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
+    doc = SimpleDocTemplate(temp.name, pagesize=A4)
+    styles = getSampleStyleSheet()
 
+    content = [
+        Paragraph("<b>Executive Delivery Intelligence Report</b>", styles["Title"]),
+        Paragraph(f"Utilization Health: {kpis['util']}%", styles["Normal"]),
+        Paragraph(f"Delivery Risk Health: {kpis['risk']}%", styles["Normal"]),
+        Paragraph(f"Margin Health: {kpis['margin']}%", styles["Normal"]),
+        Paragraph("<br/><b>AI Summary</b>", styles["Heading2"]),
+        Paragraph(summary or "N/A", styles["Normal"]),
+    ]
+
+    doc.build(content)
+    return temp.name
+
+# ===============================
+# RUN ANALYSIS
+# ===============================
 if st.button("🚀 Run AI Analysis"):
-    with st.spinner("Running multi-agent analysis..."):
-        result = orchestrator.analyze(
-            util_df, risk_df, cost_df, hr_df, use_llm
-        )
+    result = orchestrator.analyze(
+        util_df, risk_df, cost_df, hr_df, use_llm
+    )
 
-    st.subheader("📉 Underutilized Employees")
-    st.dataframe(result["low_util"], use_container_width=True)
+    # KPI CALCULATION
+    util_kpi = round((1 - len(result["low_util"]) / util_df.shape[0]) * 100, 1)
+    risk_kpi = round((1 - len(result["risk_projects"]) / risk_df.shape[0]) * 100, 1)
+    margin_kpi = round((1 - len(result["loss_projects"]) / cost_df.shape[0]) * 100, 1)
 
-    st.subheader("🚨 Delivery Risk Projects (Jira)")
-    st.dataframe(result["risk_projects"], use_container_width=True)
+    st.markdown("### 📊 Executive KPIs")
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Utilization Health %", f"{util_kpi}%")
+    c2.metric("Delivery Risk Health %", f"{risk_kpi}%")
+    c3.metric("Margin Health %", f"{margin_kpi}%")
 
-    st.subheader("💰 Loss-Making / Margin Risk Projects")
-    st.dataframe(result["loss_projects"], use_container_width=True)
+    st.divider()
 
-    st.subheader("⚠️ HR Risk Indicators")
-    st.dataframe(result["hr_risks"], use_container_width=True)
+    # ROLE-BASED VIEWS
+    if role == "Delivery Head":
+        st.subheader("🚨 Delivery Risk Projects")
+        st.dataframe(result["risk_projects"], use_container_width=True)
 
+        st.subheader("📉 Underutilized Employees")
+        st.dataframe(result["low_util"], use_container_width=True)
+
+    elif role == "HR":
+        st.subheader("⚠️ HR Risk Indicators")
+        st.dataframe(result["hr_risks"], use_container_width=True)
+
+    elif role == "Finance":
+        st.subheader("💰 Loss / Margin Risk Projects")
+        st.dataframe(result["loss_projects"], use_container_width=True)
+
+    # EXECUTIVE SUMMARY + PDF
     if use_llm and result["explanation"]:
         st.subheader("🧠 Executive AI Summary")
         st.success(result["explanation"])
 
+        pdf = generate_pdf_report(
+            {"util": util_kpi, "risk": risk_kpi, "margin": margin_kpi},
+            result["explanation"]
+        )
+
+        with open(pdf, "rb") as f:
+            st.download_button(
+                "📄 Download Executive PDF Report",
+                f,
+                file_name="Delivery_Intelligence_Report.pdf",
+                mime="application/pdf"
+            )
+
 # ===============================
-# 🤖 CONVERSATIONAL AI BOT
+# CHATBOT
 # ===============================
 st.markdown("---")
 st.subheader("🤖 Ask Delivery Intelligence Bot")
 
-user_question = st.text_input(
-    "Ask about utilization, Jira risk, HR issues, cost overrun, margin, etc."
-)
+question = st.text_input("Ask about utilization, delivery risk, HR or margin")
 
 if st.button("🧠 Get Answer"):
-    if not user_question.strip():
-        st.warning("Please enter a question.")
-    else:
-        with st.spinner("Analyzing..."):
-            answer = answer_question(
-                user_question,
-                util_df,
-                risk_df,
-                cost_df,
-                hr_df
-            )
-        st.success(answer)
+    answer = answer_question(
+        question, util_df, risk_df, cost_df, hr_df
+    )
+    st.success(answer)
 
-
-
+# ===============================
+# FOOTER
+# ===============================
+st.markdown(
+    """
+    <hr>
+    <div style="text-align:center; color:gray; font-size:13px;">
+        © 2026 Compunnel Digital | Agentic AI – Delivery Intelligence Platform
+    </div>
+    """,
+    unsafe_allow_html=True
+)
