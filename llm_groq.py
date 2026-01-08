@@ -6,7 +6,7 @@ def explain_insight(prompt: str) -> str:
     api_key = os.getenv("GROQ_API_KEY")
 
     if not api_key:
-        return "LLM unavailable: GROQ_API_KEY not set"
+        return "❌ LLM Error: GROQ_API_KEY not set"
 
     try:
         with httpx.Client(timeout=30, trust_env=False) as client:
@@ -19,24 +19,29 @@ def explain_insight(prompt: str) -> str:
                 json={
                     "model": "llama-3.1-8b-instant",
                     "messages": [
-                        {"role": "system", "content": "You are an enterprise delivery intelligence advisor."},
+                        {
+                            "role": "system",
+                            "content": (
+                                "You are a senior enterprise delivery, HR, and finance intelligence advisor. "
+                                "Respond with clear insights, impact, and actions."
+                            )
+                        },
                         {"role": "user", "content": prompt}
                     ],
                     "temperature": 0.2,
                 },
             )
 
-        # ❗ Check HTTP failure
+        # ---------- HARD VALIDATION ----------
         if response.status_code != 200:
-            return f"LLM unavailable: HTTP {response.status_code}"
+            return f"❌ LLM Error: HTTP {response.status_code} – {response.text}"
 
-        data = response.json()
+        payload = response.json()
 
-        # ❗ Defensive check
-        if "choices" not in data or not data["choices"]:
-            return "LLM unavailable: empty response from model"
+        if "choices" not in payload:
+            return f"❌ LLM Error: Invalid response format → {payload}"
 
-        return data["choices"][0]["message"]["content"]
+        return payload["choices"][0]["message"]["content"]
 
     except Exception as e:
-        return f"LLM unavailable: {str(e)}"
+        return f"❌ LLM Exception: {str(e)}"
