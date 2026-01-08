@@ -1,10 +1,17 @@
 import streamlit as st
+
+# ✅ MUST BE FIRST STREAMLIT CALL
+st.set_page_config(
+    page_title="Agentic AI – Delivery Intelligence | Compunnel",
+    layout="wide"
+)
+
+# ----------------------------
+# OTHER IMPORTS AFTER THIS
+# ----------------------------
 import pandas as pd
 import io
 from PIL import Image
-import os
-st.write("GROQ key loaded:", bool(os.getenv("GROQ_API_KEY")))
-
 
 from models import (
     utilization_model,
@@ -14,6 +21,7 @@ from models import (
 )
 from orchestrator import Orchestrator
 from qa_bot import answer_question
+
 
 # --------------------------------
 # PAGE CONFIG
@@ -153,5 +161,6 @@ if st.button("🧠 Get Answer"):
             question, util_df, risk_df, cost_df, hr_df
         )
     st.success(response)
+
 
 
