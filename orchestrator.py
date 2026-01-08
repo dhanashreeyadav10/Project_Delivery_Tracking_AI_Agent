@@ -1,7 +1,6 @@
 from agents import *
 from llm_groq import explain_insight
 
-
 class Orchestrator:
     def __init__(self):
         self.util = UtilizationAgent()
@@ -15,18 +14,18 @@ class Orchestrator:
         loss = self.cost.run(cost_df)
         hr = self.hr.run(hr_df)
 
-        explanation = explain_insight(
-            f"""
-            Enterprise Delivery Overview:
+        explanation = ""
+        if use_llm:
+            explanation = explain_insight(
+                f"""
+                Underutilized Employees: {len(low)}
+                Delivery Risk Projects: {len(risky)}
+                Loss-Making Projects: {len(loss)}
+                HR Risk Employees: {len(hr)}
 
-            Underutilized Employees: {len(low)}
-            Delivery Risk Projects: {len(risky)}
-            Loss-Making Projects: {len(loss)}
-            HR Attrition Risk Employees: {len(hr)}
-
-            Provide executive-level insights and actions.
-            """
-        )
+                Provide executive insights and recommendations.
+                """
+            )
 
         return {
             "low_util": low,
