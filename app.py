@@ -27,7 +27,7 @@ st.set_page_config(
 # ===============================
 # HEADER WITH LOGO
 # ===============================
-logo = Image.open("assets/compunnel_logo.png")
+logo = Image.open("compunnel_logo.jpg")
 
 col1, col2 = st.columns([1, 6])
 
@@ -226,3 +226,4 @@ if st.button("🧠 Get Answer"):
         question, util_df, risk_df, cost_df, hr_df
     )
     st.success(answer)
+
