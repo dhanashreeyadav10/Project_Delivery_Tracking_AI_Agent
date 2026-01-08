@@ -30,19 +30,13 @@ st.set_page_config(
 )
 
 # ===============================
-# PROFESSIONAL HEADER
+# HEADER
 # ===============================
 st.markdown(
     """
     <style>
-    .header-container {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        padding: 10px 0 20px 0;
-    }
     .header-title {
-        font-size: 38px;
+        font-size: 36px;
         font-weight: 700;
     }
     .header-subtitle {
@@ -57,20 +51,14 @@ st.markdown(
 col1, col2 = st.columns([1, 7])
 
 with col1:
-    st.image("compunnel_logo.jpg", width=140)
+    st.image("assets/compunnel_logo.png", width=140)
 
 with col2:
     st.markdown(
         """
-        <div class="header-container">
-            <div>
-                <div class="header-title">
-                    Agentic AI – Project & Delivery Intelligence
-                </div>
-                <div class="header-subtitle">
-                    Enterprise-grade utilization, delivery risk, cost & HR intelligence
-                </div>
-            </div>
+        <div class="header-title">Agentic AI – Project & Delivery Intelligence</div>
+        <div class="header-subtitle">
+            Enterprise-grade utilization, delivery risk, cost & HR intelligence
         </div>
         """,
         unsafe_allow_html=True
@@ -81,18 +69,16 @@ st.divider()
 # ===============================
 # SIDEBAR
 # ===============================
-st.sidebar.image("compunnel_logo.jpg", width=180)
+st.sidebar.image("assets/compunnel_logo.png", width=180)
 st.sidebar.markdown("---")
 
-st.sidebar.header("📂 Upload Data")
 uploaded_file = st.sidebar.file_uploader(
-    "Upload Delivery Data (Excel / CSV / TXT / PDF)",
-    type=["xlsx", "csv", "txt", "pdf"]
+    "📂 Upload Delivery Data (CSV / Excel)",
+    type=["csv", "xlsx"]
 )
 
-st.sidebar.header("🧑‍💼 Role View")
 role = st.sidebar.radio(
-    "Select Role",
+    "🧑‍💼 Role View",
     ["Delivery Head", "HR", "Finance"]
 )
 
@@ -102,62 +88,27 @@ use_llm = st.sidebar.checkbox("Generate Executive AI Summary")
 # REQUIRED COLUMNS
 # ===============================
 REQUIRED_COLS = [
-    "employee_id", "employee_name", "department", "designation",
-    "employment_type", "location", "experience_years", "cost_per_hour",
-    "manager_id", "project_id", "project_name", "client_name",
-    "project_type", "start_date", "end_date", "planned_hours",
-    "billing_rate", "work_date", "hours_logged", "billable",
-    "task_type", "jira_ticket", "ticket_status", "priority",
-    "story_points", "attendance_pct", "leave_days", "performance_rating"
+    "employee_id","employee_name","department","designation",
+    "employment_type","location","experience_years","cost_per_hour",
+    "manager_id","project_id","project_name","client_name",
+    "project_type","start_date","end_date","planned_hours",
+    "billing_rate","work_date","hours_logged","billable",
+    "task_type","jira_ticket","ticket_status","priority",
+    "story_points","attendance_pct","leave_days","performance_rating"
 ]
-
-# ===============================
-# FILE PARSERS
-# ===============================
-def parse_excel(file_bytes):
-    return pd.read_excel(io.BytesIO(file_bytes))
-
-def parse_csv_txt(file_bytes):
-    import chardet
-    encoding = chardet.detect(file_bytes).get("encoding", "utf-8")
-    text = file_bytes.decode(encoding, errors="ignore")
-    df = pd.read_csv(io.StringIO(text))
-    return df
-
-def parse_pdf(file_bytes):
-    import pdfplumber
-    rows = []
-    with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
-        for page in pdf.pages:
-            text = page.extract_text()
-            if not text:
-                continue
-            for line in text.split("\n"):
-                parts = re.split(r"[,\s]+", line.strip())
-                if len(parts) >= len(REQUIRED_COLS):
-                    rows.append(parts[:len(REQUIRED_COLS)])
-    return pd.DataFrame(rows, columns=REQUIRED_COLS)
 
 # ===============================
 # LOAD DATA
 # ===============================
-def load_uploaded_data(file):
+def load_data(file):
     if not file:
-        st.warning("Please upload a file to proceed.")
+        st.warning("Please upload a data file to proceed.")
         st.stop()
 
-    ext = file.name.lower().split(".")[-1]
-    file_bytes = file.getvalue()
-
-    if ext == "xlsx":
-        df = parse_excel(file_bytes)
-    elif ext in ["csv", "txt"]:
-        df = parse_csv_txt(file_bytes)
-    elif ext == "pdf":
-        df = parse_pdf(file_bytes)
+    if file.name.endswith(".csv"):
+        df = pd.read_csv(file)
     else:
-        st.error("Unsupported file format")
-        st.stop()
+        df = pd.read_excel(file)
 
     df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
 
@@ -167,20 +118,19 @@ def load_uploaded_data(file):
         st.stop()
 
     numeric_cols = [
-        "hours_logged", "cost_per_hour", "billing_rate",
-        "attendance_pct", "leave_days", "performance_rating",
-        "experience_years", "story_points", "planned_hours"
+        "hours_logged","cost_per_hour","billing_rate",
+        "attendance_pct","leave_days","performance_rating",
+        "experience_years","story_points","planned_hours"
     ]
     for col in numeric_cols:
         df[col] = pd.to_numeric(df[col], errors="coerce")
 
-    st.success("✅ Data validated successfully")
     return df
 
-data = load_uploaded_data(uploaded_file)
+data = load_data(uploaded_file)
 
 # ===============================
-# MODELS
+# RUN MODELS
 # ===============================
 util_df = utilization_model(data)
 risk_df = delivery_risk_model(data)
@@ -199,9 +149,9 @@ orchestrator = load_orchestrator()
 # ===============================
 # PDF REPORT
 # ===============================
-def generate_pdf_report(kpis, summary):
-    temp = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
-    doc = SimpleDocTemplate(temp.name, pagesize=A4)
+def generate_pdf(summary, kpis):
+    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
+    doc = SimpleDocTemplate(tmp.name, pagesize=A4)
     styles = getSampleStyleSheet()
 
     content = [
@@ -209,12 +159,12 @@ def generate_pdf_report(kpis, summary):
         Paragraph(f"Utilization Health: {kpis['util']}%", styles["Normal"]),
         Paragraph(f"Delivery Risk Health: {kpis['risk']}%", styles["Normal"]),
         Paragraph(f"Margin Health: {kpis['margin']}%", styles["Normal"]),
-        Paragraph("<br/><b>AI Summary</b>", styles["Heading2"]),
-        Paragraph(summary or "N/A", styles["Normal"]),
+        Paragraph("<br/><b>Executive Summary</b>", styles["Heading2"]),
+        Paragraph(summary, styles["Normal"]),
     ]
 
     doc.build(content)
-    return temp.name
+    return tmp.name
 
 # ===============================
 # RUN ANALYSIS
@@ -224,11 +174,24 @@ if st.button("🚀 Run AI Analysis"):
         util_df, risk_df, cost_df, hr_df, use_llm
     )
 
-    # KPI CALCULATION
-    util_kpi = round((1 - len(result["low_util"]) / util_df.shape[0]) * 100, 1)
-    risk_kpi = round((1 - len(result["risk_projects"]) / risk_df.shape[0]) * 100, 1)
-    margin_kpi = round((1 - len(result["loss_projects"]) / cost_df.shape[0]) * 100, 1)
+    # -----------------------------
+    # KPI CALCULATIONS (CORRECT)
+    # -----------------------------
+    total_employees = util_df["employee_id"].nunique()
+    underutilized = util_df[util_df["utilization_pct"] < 60]["employee_id"].nunique()
 
+    total_projects = risk_df["project_id"].nunique()
+    risky_projects = risk_df[risk_df["risk_flag"] == 1]["project_id"].nunique()
+
+    loss_projects = cost_df[cost_df["margin"] < 0]["project_id"].nunique()
+
+    util_kpi = round(((total_employees - underutilized) / total_employees) * 100, 1)
+    risk_kpi = round(((total_projects - risky_projects) / total_projects) * 100, 1)
+    margin_kpi = round(((total_projects - loss_projects) / total_projects) * 100, 1)
+
+    # -----------------------------
+    # KPI DISPLAY
+    # -----------------------------
     st.markdown("### 📊 Executive KPIs")
     c1, c2, c3 = st.columns(3)
     c1.metric("Utilization Health %", f"{util_kpi}%")
@@ -237,7 +200,9 @@ if st.button("🚀 Run AI Analysis"):
 
     st.divider()
 
+    # -----------------------------
     # ROLE-BASED VIEWS
+    # -----------------------------
     if role == "Delivery Head":
         st.subheader("🚨 Delivery Risk Projects")
         st.dataframe(result["risk_projects"], use_container_width=True)
@@ -246,51 +211,48 @@ if st.button("🚀 Run AI Analysis"):
         st.dataframe(result["low_util"], use_container_width=True)
 
     elif role == "HR":
-        st.subheader("⚠️ HR Risk Indicators")
+        st.subheader("⚠️ HR Risk Employees")
         st.dataframe(result["hr_risks"], use_container_width=True)
 
     elif role == "Finance":
         st.subheader("💰 Loss / Margin Risk Projects")
         st.dataframe(result["loss_projects"], use_container_width=True)
 
-    # EXECUTIVE SUMMARY + PDF
-    if use_llm and result["explanation"]:
-        st.subheader("🧠 Executive AI Summary")
-        st.success(result["explanation"])
+    # -----------------------------
+    # EXECUTIVE SUMMARY (SAFE)
+    # -----------------------------
+    st.subheader("🧠 Executive AI Summary")
+    st.success(result["explanation"])
 
-        pdf = generate_pdf_report(
-            {"util": util_kpi, "risk": risk_kpi, "margin": margin_kpi},
-            result["explanation"]
+    pdf_path = generate_pdf(
+        result["explanation"],
+        {"util": util_kpi, "risk": risk_kpi, "margin": margin_kpi}
+    )
+
+    with open(pdf_path, "rb") as f:
+        st.download_button(
+            "📄 Download Executive PDF Report",
+            f,
+            file_name="Delivery_Intelligence_Report.pdf",
+            mime="application/pdf"
         )
 
-        with open(pdf, "rb") as f:
-            st.download_button(
-                "📄 Download Executive PDF Report",
-                f,
-                file_name="Delivery_Intelligence_Report.pdf",
-                mime="application/pdf"
-            )
-
 # ===============================
-#Chat Bot
+# CHATBOT
 # ===============================
 st.markdown("---")
 st.subheader("🤖 Ask Delivery Intelligence Bot")
 
-question = st.text_input(
-    "Ask about utilization, delivery risk, HR or margin"
-)
+question = st.text_input("Ask about utilization, delivery risk, HR or margin")
 
 if st.button("🧠 Get Answer"):
-    if not question.strip():
-        st.warning("Please enter a question.")
-    else:
-        with st.spinner("Analyzing..."):
-            answer = answer_question(
-                question, util_df, risk_df, cost_df, hr_df
-            )
+    if question.strip():
+        answer = answer_question(
+            question, util_df, risk_df, cost_df, hr_df
+        )
         st.success(answer)
-
+    else:
+        st.warning("Please enter a question.")
 
 # ===============================
 # FOOTER
@@ -304,6 +266,3 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-
-
