@@ -3,6 +3,9 @@ import pandas as pd
 import io
 import re
 
+# ===============================
+# INTERNAL IMPORTS
+# ===============================
 from models import (
     utilization_model,
     delivery_risk_model,
@@ -12,22 +15,25 @@ from models import (
 from orchestrator import Orchestrator
 from qa_bot import answer_question
 
-# ---------------- PAGE CONFIG ----------------
+# ===============================
+# PAGE CONFIG
+# ===============================
 st.set_page_config(
-    page_title="Agentic AI – Project & Delivery Intelligence",
+    page_title="🧠 Agentic AI – Project & Delivery Tracking",
     layout="wide"
 )
 
-# ---------------- SIDEBAR ----------------
-st.sidebar.image("compunnel_logo.jpg", use_container_width=True)
-st.sidebar.header("📂 Upload Delivery Data")
+st.title("🧠 Agentic AI – Project & Delivery Intelligence")
 
+# ===============================
+# FILE UPLOAD
+# ===============================
+st.sidebar.header("📂 Upload Data")
 uploaded_file = st.sidebar.file_uploader(
-    "Upload Delivery Data (CSV / Excel / TXT / PDF)",
-    type=["csv", "xlsx", "txt", "pdf"]
+    "Upload Delivery Data (Excel / CSV / TXT / PDF)",
+    type=["xlsx", "csv", "txt", "pdf"]
 )
 
-# ---------------- REQUIRED COLUMNS ----------------
 REQUIRED_COLS = [
     "employee_id", "employee_name", "department", "designation",
     "employment_type", "location", "experience_years", "cost_per_hour",
@@ -38,129 +44,184 @@ REQUIRED_COLS = [
     "story_points", "attendance_pct", "leave_days", "performance_rating"
 ]
 
-# ---------------- FILE PARSERS ----------------
-def parse_excel(b):
-    return pd.read_excel(io.BytesIO(b))
+# ===============================
+# FILE PARSERS
+# ===============================
+def parse_excel(file_bytes):
+    return pd.read_excel(io.BytesIO(file_bytes))
 
-def parse_csv_txt(b):
-    return pd.read_csv(io.StringIO(b.decode("utf-8", errors="ignore")))
 
-def parse_pdf(b):
+def parse_csv_txt(file_bytes):
+    import chardet
+    encoding = chardet.detect(file_bytes).get("encoding", "utf-8")
+    text = file_bytes.decode(encoding, errors="ignore")
+
+    lines = [l.strip() for l in text.splitlines() if l.strip()]
+    if len(lines) < 2:
+        raise ValueError("File has no data rows")
+
+    sample = lines[1]
+    delimiter = None
+    for d in [",", ";", "\t", "|"]:
+        if sample.count(d) >= 5:
+            delimiter = d
+            break
+    if delimiter is None:
+        raise ValueError("Unable to detect delimiter")
+
+    header = lines[0].split(delimiter)
+    if len(header) < len(REQUIRED_COLS):
+        st.warning("⚠️ Malformed header detected. Auto-repairing.")
+        header_line = delimiter.join(REQUIRED_COLS)
+        csv_text = "\n".join([header_line] + lines[1:])
+    else:
+        csv_text = "\n".join(lines)
+
+    df = pd.read_csv(io.StringIO(csv_text), sep=delimiter, engine="python")
+    return df
+
+
+def parse_pdf(file_bytes):
     import pdfplumber
+
     rows = []
-    with pdfplumber.open(io.BytesIO(b)) as pdf:
+    with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
         for page in pdf.pages:
             text = page.extract_text()
             if not text:
                 continue
             for line in text.split("\n"):
-                parts = re.split(r"[,\s]+", line)
+                parts = re.split(r"[,\s]+", line.strip())
                 if len(parts) >= len(REQUIRED_COLS):
                     rows.append(parts[:len(REQUIRED_COLS)])
+
+    if not rows:
+        raise ValueError("No usable tabular data found in PDF")
+
     return pd.DataFrame(rows, columns=REQUIRED_COLS)
 
-# ---------------- LOAD DATA ----------------
-def load_data(file):
+# ===============================
+# STRICT LOADER (NO FALLBACK)
+# ===============================
+def load_uploaded_data(file):
     if file is None:
-        st.info("⬅️ Upload a dataset to begin")
+        st.warning("Please upload a file to proceed.")
         st.stop()
 
-    ext = file.name.split(".")[-1].lower()
-    data = file.getvalue()
+    file_bytes = file.getvalue()
+    ext = file.name.lower().split(".")[-1]
 
     try:
         if ext == "xlsx":
-            df = parse_excel(data)
+            df = parse_excel(file_bytes)
         elif ext in ["csv", "txt"]:
-            df = parse_csv_txt(data)
+            df = parse_csv_txt(file_bytes)
         elif ext == "pdf":
-            df = parse_pdf(data)
+            df = parse_pdf(file_bytes)
         else:
             st.error("Unsupported file format")
             st.stop()
     except Exception as e:
-        st.error(f"File parsing failed: {e}")
+        st.error("❌ Failed to parse uploaded file")
+        st.code(str(e))
         st.stop()
 
-    df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
+    # Normalize column names
+    df.columns = (
+        df.columns.astype(str)
+        .str.strip().str.lower()
+        .str.replace(" ", "_")
+    )
 
     missing = set(REQUIRED_COLS) - set(df.columns)
     if missing:
-        st.error(f"Missing columns: {missing}")
+        st.error("❌ Required columns missing")
+        st.write("Missing columns:", list(missing))
         st.stop()
 
+    # Convert numerics
     numeric_cols = [
         "hours_logged", "cost_per_hour", "billing_rate",
         "attendance_pct", "leave_days", "performance_rating",
-        "experience_years", "planned_hours"
+        "experience_years", "story_points", "planned_hours"
     ]
     for col in numeric_cols:
         df[col] = pd.to_numeric(df[col], errors="coerce")
 
+    st.success("✅ Uploaded data validated successfully")
+    st.write("Detected columns:", list(df.columns))
     return df
 
-data = load_data(uploaded_file)
+# ===============================
+# LOAD DATA
+# ===============================
+data = load_uploaded_data(uploaded_file)
 
-# ---------------- MODELS ----------------
+# ===============================
+# RUN MODELS
+# ===============================
 util_df = utilization_model(data)
 risk_df = delivery_risk_model(data)
 cost_df = cost_margin_model(data)
 hr_df = hr_health_model(data)
 
-# ---------------- ORCHESTRATOR ----------------
+# ===============================
+# ORCHESTRATOR
+# ===============================
 @st.cache_resource
 def load_orchestrator():
     return Orchestrator()
 
 orchestrator = load_orchestrator()
 
-# ---------------- UI ----------------
-st.title("🧠 Agentic AI – Project & Delivery Intelligence")
-
+# ===============================
+# ANALYSIS DASHBOARD
+# ===============================
 st.sidebar.header("⚙️ Controls")
 use_llm = st.sidebar.checkbox("Generate Executive AI Summary (LLM)")
 
-# ---------------- ANALYSIS SECTION ----------------
 if st.button("🚀 Run AI Analysis"):
-    result = orchestrator.analyze(
-        util_df, risk_df, cost_df, hr_df, use_llm
-    )
+    with st.spinner("Running multi-agent analysis..."):
+        result = orchestrator.analyze(
+            util_df, risk_df, cost_df, hr_df, use_llm
+        )
 
     st.subheader("📉 Underutilized Employees")
     st.dataframe(result["low_util"], use_container_width=True)
 
-    st.subheader("🚨 Delivery Risk Projects")
+    st.subheader("🚨 Delivery Risk Projects (Jira)")
     st.dataframe(result["risk_projects"], use_container_width=True)
 
-    st.subheader("💰 Margin Risk Projects")
+    st.subheader("💰 Loss-Making / Margin Risk Projects")
     st.dataframe(result["loss_projects"], use_container_width=True)
 
-    st.subheader("⚠️ HR Risk Employees")
+    st.subheader("⚠️ HR Risk Indicators")
     st.dataframe(result["hr_risks"], use_container_width=True)
 
-    st.subheader("🧠 Executive AI Summary")
-    st.success(result["explanation"])
+    if use_llm and result["explanation"]:
+        st.subheader("🧠 Executive AI Summary")
+        st.success(result["explanation"])
 
-# ---------------- CHAT BOT ----------------
+# ===============================
+# 🤖 CONVERSATIONAL AI BOT
+# ===============================
 st.markdown("---")
 st.subheader("🤖 Ask Delivery Intelligence Bot")
 
-question = st.text_input(
-    "Ask a question",
-    placeholder="Are there people likely to leave? If yes, list their name, employee id and team name"
+user_question = st.text_input(
+    "Ask about utilization, Jira risk, HR issues, cost overrun, margin, etc."
 )
 
 if st.button("🧠 Get Answer"):
-    answer = answer_question(
-        question, util_df, risk_df, cost_df, hr_df
-    )
-
-    if isinstance(answer, pd.DataFrame):
-        st.dataframe(answer, use_container_width=True)
+    if not user_question.strip():
+        st.warning("Please enter a question.")
     else:
-        st.info(answer)
-
-st.markdown(
-    "<hr/><center>© 2026 Compunnel Digital | Agentic AI – Delivery Intelligence Platform</center>",
-    unsafe_allow_html=True
-)
+        with st.spinner("Analyzing..."):
+            answer = answer_question(
+                user_question,
+                util_df,
+                risk_df,
+                cost_df,
+                hr_df
+            )
+        st.success(answer)
