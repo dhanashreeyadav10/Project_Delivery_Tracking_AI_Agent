@@ -32,7 +32,7 @@ header_col1, header_col2 = st.columns([1, 6])
 
 with header_col1:
     st.image(
-        "assets/compunnel_logo.png",
+        "compunnel_logo.jpg",
         width=160
     )
 
@@ -252,5 +252,6 @@ if st.button("🧠 Get Answer"):
                 hr_df
             )
         st.success(answer)
+
 
 
