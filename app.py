@@ -1,16 +1,17 @@
 import streamlit as st
 
-# ✅ MUST BE FIRST STREAMLIT CALL
+# =========================================================
+# 🚨 THIS MUST BE THE FIRST STREAMLIT COMMAND — NO EXCEPTIONS
+# =========================================================
 st.set_page_config(
     page_title="Agentic AI – Delivery Intelligence | Compunnel",
     layout="wide"
 )
 
-# ----------------------------
-# OTHER IMPORTS AFTER THIS
-# ----------------------------
+# =========================================================
+# IMPORTS (SAFE AFTER PAGE CONFIG)
+# =========================================================
 import pandas as pd
-import io
 from PIL import Image
 
 from models import (
@@ -22,25 +23,16 @@ from models import (
 from orchestrator import Orchestrator
 from qa_bot import answer_question
 
-
-# --------------------------------
-# PAGE CONFIG
-# --------------------------------
-st.set_page_config(
-    page_title="Agentic AI – Delivery Intelligence | Compunnel",
-    layout="wide"
-)
-
-# --------------------------------
-# HEADER
-# --------------------------------
+# =========================================================
+# HEADER WITH LOGO
+# =========================================================
 logo = Image.open("compunnel_logo.jpg")
-c1, c2 = st.columns([1, 6])
 
-with c1:
+col1, col2 = st.columns([1, 6])
+with col1:
     st.image(logo, width=120)
 
-with c2:
+with col2:
     st.markdown("""
     <h1 style="margin-bottom:0;">Agentic AI – Project & Delivery Intelligence</h1>
     <p style="color:gray;">Enterprise Delivery, Cost, HR & Risk Intelligence Platform</p>
@@ -48,9 +40,9 @@ with c2:
 
 st.markdown("---")
 
-# --------------------------------
+# =========================================================
 # SIDEBAR
-# --------------------------------
+# =========================================================
 st.sidebar.header("📂 Upload Delivery Data")
 
 uploaded_file = st.sidebar.file_uploader(
@@ -64,9 +56,9 @@ st.sidebar.markdown("""
 Agentic AI Delivery Intelligence
 """, unsafe_allow_html=True)
 
-# --------------------------------
+# =========================================================
 # REQUIRED COLUMNS
-# --------------------------------
+# =========================================================
 REQUIRED_COLS = [
     "employee_id","employee_name","department","designation","employment_type",
     "location","experience_years","cost_per_hour","manager_id","project_id",
@@ -76,12 +68,12 @@ REQUIRED_COLS = [
     "attendance_pct","leave_days","performance_rating"
 ]
 
-# --------------------------------
+# =========================================================
 # LOAD DATA
-# --------------------------------
+# =========================================================
 def load_data(file):
     if not file:
-        st.info("Please upload delivery data to proceed.")
+        st.info("Please upload a delivery dataset to begin.")
         st.stop()
 
     if file.name.endswith(".xlsx"):
@@ -89,7 +81,7 @@ def load_data(file):
     else:
         df = pd.read_csv(file)
 
-    df.columns = df.columns.str.lower().str.replace(" ", "_")
+    df.columns = df.columns.str.lower().str.strip().str.replace(" ", "_")
 
     missing = set(REQUIRED_COLS) - set(df.columns)
     if missing:
@@ -98,8 +90,10 @@ def load_data(file):
 
     numeric_cols = [
         "hours_logged","cost_per_hour","billing_rate","attendance_pct",
-        "leave_days","performance_rating","experience_years","story_points","planned_hours"
+        "leave_days","performance_rating","experience_years",
+        "story_points","planned_hours"
     ]
+
     for col in numeric_cols:
         df[col] = pd.to_numeric(df[col], errors="coerce")
 
@@ -108,19 +102,18 @@ def load_data(file):
 
 data = load_data(uploaded_file)
 
-# --------------------------------
+# =========================================================
 # RUN MODELS
-# --------------------------------
+# =========================================================
 util_df = utilization_model(data)
 risk_df = delivery_risk_model(data)
 cost_df = cost_margin_model(data)
 hr_df = hr_health_model(data)
 
-# --------------------------------
+# =========================================================
 # ORCHESTRATOR
-# --------------------------------
+# =========================================================
 orchestrator = Orchestrator()
-
 use_llm = st.sidebar.checkbox("Generate Executive AI Summary", value=True)
 
 if st.button("🚀 Run AI Analysis"):
@@ -129,38 +122,35 @@ if st.button("🚀 Run AI Analysis"):
     )
 
     st.subheader("📉 Underutilized Employees")
-    st.dataframe(result["low_util"])
+    st.dataframe(result["low_util"], use_container_width=True)
 
     st.subheader("🚨 Delivery Risk Projects")
-    st.dataframe(result["risk_projects"])
+    st.dataframe(result["risk_projects"], use_container_width=True)
 
     st.subheader("💰 Loss-Making Projects")
-    st.dataframe(result["loss_projects"])
+    st.dataframe(result["loss_projects"], use_container_width=True)
 
     st.subheader("⚠️ HR Risk Employees")
-    st.dataframe(result["hr_risks"])
+    st.dataframe(result["hr_risks"], use_container_width=True)
 
     if use_llm:
         st.subheader("🧠 Executive AI Summary")
         st.success(result["explanation"])
 
-# --------------------------------
+# =========================================================
 # QA BOT
-# --------------------------------
+# =========================================================
 st.markdown("---")
 st.subheader("🤖 Ask Delivery Intelligence Bot")
 
 question = st.text_input(
     "Ask about utilization, cost, risk, HR, margin, attrition, etc.",
-    placeholder="Give key insights from the data"
+    placeholder="Are there people likely to leave?"
 )
 
 if st.button("🧠 Get Answer"):
     with st.spinner("Analyzing with LLM..."):
-        response = answer_question(
+        answer = answer_question(
             question, util_df, risk_df, cost_df, hr_df
         )
-    st.success(response)
-
-
-
+    st.success(answer)
