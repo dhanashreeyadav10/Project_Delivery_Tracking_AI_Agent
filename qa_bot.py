@@ -4,32 +4,27 @@ from llm_groq import explain_insight
 def answer_question(question, util_df, risk_df, cost_df, hr_df):
     q = question.lower()
 
-    # ---------------- HR / ATTRITION (TABULAR)
-    if "leave" in q or "attrition" in q:
-        risky = hr_df[hr_df["hr_risk"] == 1]
+    # ---------------- UTILIZATION ----------------
+    if any(k in q for k in ["underutilized", "bench", "utilization below"]):
+        df = util_df[util_df["utilization_pct"] < 60].sort_values("utilization_pct")
+        return df.head(10)
 
-        if risky.empty:
-            return "✅ No immediate attrition risks detected."
+    # ---------------- DELIVERY RISK ----------------
+    if any(k in q for k in ["delivery risk", "delay", "risky projects"]):
+        df = risk_df[risk_df["risk_flag"] == 1]
+        return df
 
-        return risky.rename(columns={
-            "employee_id":"Employee ID",
-            "avg_attendance":"Attendance %",
-            "avg_rating":"Performance Rating"
-        })
+    # ---------------- FINANCIAL ----------------
+    if any(k in q for k in ["loss", "margin", "financial"]):
+        df = cost_df[cost_df["margin"] < 0]
+        return df
 
-    # ---------------- UTILIZATION
-    if "utilization" in q or "bench" in q:
-        return util_df[util_df["utilization_pct"] < 60]
+    # ---------------- HR / ATTRITION ----------------
+    if any(k in q for k in ["hr risk", "attrition", "likely to leave"]):
+        df = hr_df[hr_df["hr_risk"] == 1]
+        return df
 
-    # ---------------- DELIVERY RISK
-    if "risk" in q or "delay" in q:
-        return risk_df[risk_df["risk_flag"] == 1]
-
-    # ---------------- COST / MARGIN
-    if "cost" in q or "margin" in q or "loss" in q:
-        return cost_df[cost_df["margin"] < 0]
-
-    # ---------------- EXECUTIVE
+    # ---------------- EXECUTIVE / WHY ----------------
     prompt = f"""
     You are a senior delivery leader.
 
@@ -37,8 +32,9 @@ def answer_question(question, util_df, risk_df, cost_df, hr_df):
     {question}
 
     Provide:
-    - Insight
+    - Clear answer
     - Business impact
-    - Recommendations
+    - Actionable recommendation
     """
+
     return explain_insight(prompt)
