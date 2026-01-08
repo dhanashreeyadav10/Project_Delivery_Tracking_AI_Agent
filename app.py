@@ -1,11 +1,11 @@
 import streamlit as st
 import pandas as pd
-import tempfile
+import io
+import re
 
-from reportlab.platypus import SimpleDocTemplate, Paragraph
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.lib.pagesizes import A4
-
+# ===============================
+# INTERNAL IMPORTS
+# ===============================
 from models import (
     utilization_model,
     delivery_risk_model,
@@ -19,68 +19,80 @@ from qa_bot import answer_question
 # PAGE CONFIG
 # ===============================
 st.set_page_config(
-    page_title="Agentic AI – Project & Delivery Intelligence",
-    page_icon="🧠",
+    page_title="Agentic AI – Delivery Intelligence",
     layout="wide"
 )
 
 # ===============================
-# SIDEBAR (ONLY LOGO LOCATION)
+# SIDEBAR – BRANDING
 # ===============================
-st.sidebar.image("compunnel_logo.jpg", width=180)
+st.sidebar.image("compunnel_logo.jpg", use_column_width=True)
 st.sidebar.markdown("---")
 
+# ===============================
+# TITLE
+# ===============================
+st.title("🤖 Ask Delivery Intelligence Bot")
+st.caption("Ask about teams, utilization, delivery risk, HR or margin")
+
+# ===============================
+# FILE UPLOAD
+# ===============================
+st.sidebar.header("📂 Upload Delivery Data (CSV / Excel)")
 uploaded_file = st.sidebar.file_uploader(
-    "📂 Upload Delivery Data (CSV / Excel)",
+    "Upload Delivery Data",
     type=["csv", "xlsx"]
 )
 
-role = st.sidebar.radio(
-    "🧑‍💼 Role View",
-    ["Delivery Head", "HR", "Finance"]
-)
-
-use_llm = st.sidebar.checkbox("Generate Executive AI Summary")
-
-# ===============================
-# MAIN TITLE (NO LOGO HERE)
-# ===============================
-st.title("🧠 Agentic AI – Project & Delivery Intelligence")
-st.caption("Enterprise-grade utilization, delivery risk, cost & HR intelligence")
-
-st.divider()
-
-# ===============================
-# REQUIRED COLUMNS
-# ===============================
 REQUIRED_COLS = [
-    "employee_id","employee_name","department","designation",
-    "employment_type","location","experience_years","cost_per_hour",
-    "manager_id","project_id","project_name","client_name",
-    "project_type","start_date","end_date","planned_hours",
-    "billing_rate","work_date","hours_logged","billable",
-    "task_type","jira_ticket","ticket_status","priority",
-    "story_points","attendance_pct","leave_days","performance_rating"
+    "employee_id", "employee_name", "department", "designation",
+    "employment_type", "location", "experience_years", "cost_per_hour",
+    "manager_id", "project_id", "project_name", "client_name",
+    "project_type", "start_date", "end_date", "planned_hours",
+    "billing_rate", "work_date", "hours_logged", "billable",
+    "task_type", "jira_ticket", "ticket_status", "priority",
+    "story_points", "attendance_pct", "leave_days", "performance_rating"
 ]
+
+# ===============================
+# FILE LOADER
+# ===============================
+def load_data(file):
+    if file is None:
+        st.info("Please upload delivery data to proceed.")
+        st.stop()
+
+    if file.name.endswith(".csv"):
+        df = pd.read_csv(file)
+    else:
+        df = pd.read_excel(file)
+
+    df.columns = (
+        df.columns.astype(str)
+        .str.strip().str.lower()
+        .str.replace(" ", "_")
+    )
+
+    missing = set(REQUIRED_COLS) - set(df.columns)
+    if missing:
+        st.error("❌ Missing required columns:")
+        st.write(list(missing))
+        st.stop()
+
+    # Convert numerics
+    numeric_cols = [
+        "hours_logged", "cost_per_hour", "billing_rate",
+        "attendance_pct", "leave_days", "performance_rating",
+        "experience_years", "story_points", "planned_hours"
+    ]
+    for col in numeric_cols:
+        df[col] = pd.to_numeric(df[col], errors="coerce")
+
+    return df
 
 # ===============================
 # LOAD DATA
 # ===============================
-def load_data(file):
-    if not file:
-        st.warning("Please upload a data file to proceed.")
-        st.stop()
-
-    df = pd.read_csv(file) if file.name.endswith(".csv") else pd.read_excel(file)
-    df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
-
-    missing = set(REQUIRED_COLS) - set(df.columns)
-    if missing:
-        st.error(f"Missing required columns: {list(missing)}")
-        st.stop()
-
-    return df
-
 data = load_data(uploaded_file)
 
 # ===============================
@@ -92,160 +104,39 @@ cost_df = cost_margin_model(data)
 hr_df = hr_health_model(data)
 
 # ===============================
-# ORCHESTRATOR
-# ===============================
-@st.cache_resource
-def load_orchestrator():
-    return Orchestrator()
-
-orchestrator = load_orchestrator()
-
-# ===============================
-# SAFE PDF GENERATOR
-# ===============================
-def generate_pdf(summary_text: str, kpis: dict):
-    if not summary_text:
-        summary_text = "No executive summary available."
-
-    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
-    doc = SimpleDocTemplate(tmp.name, pagesize=A4)
-    styles = getSampleStyleSheet()
-
-    content = [
-        Paragraph("<b>Executive Delivery Intelligence Report</b>", styles["Title"]),
-        Paragraph(f"Utilization Health: {kpis['util']}%", styles["Normal"]),
-        Paragraph(f"Delivery Risk Health: {kpis['risk']}%", styles["Normal"]),
-        Paragraph(f"Margin Health: {kpis['margin']}%", styles["Normal"]),
-        Paragraph("<br/><b>Executive Summary</b>", styles["Heading2"]),
-        Paragraph(summary_text, styles["Normal"]),
-    ]
-
-    doc.build(content)
-    return tmp.name
-
-# ===============================
-# RUN ANALYSIS
-# ===============================
-if st.button("🚀 Run AI Analysis"):
-    result = orchestrator.analyze(
-        util_df, risk_df, cost_df, hr_df, use_llm
-    )
-
-    # -----------------------------
-    # GUARANTEE EXEC SUMMARY STRING
-    # -----------------------------
-    explanation = result.get("explanation")
-    if not explanation or not isinstance(explanation, str):
-        explanation = (
-            f"Key Insights:\n"
-            f"• Underutilized Employees: {len(result['low_util'])}\n"
-            f"• Delivery Risk Projects: {len(result['risk_projects'])}\n"
-            f"• Loss-Making Projects: {len(result['loss_projects'])}\n"
-            f"• HR Risk Employees: {len(result['hr_risks'])}\n\n"
-            "Recommended Actions:\n"
-            "• Optimize bench utilization\n"
-            "• Prioritize high-risk Jira tickets\n"
-            "• Review project cost overruns\n"
-            "• Engage HR for early risk mitigation"
-        )
-
-    # -----------------------------
-    # KPI CALCULATIONS (CORRECT)
-    # -----------------------------
-    total_employees = util_df["employee_id"].nunique()
-    underutilized = util_df[util_df["utilization_pct"] < 60]["employee_id"].nunique()
-
-    total_projects = risk_df["project_id"].nunique()
-    risky_projects = risk_df[risk_df["risk_flag"] == 1]["project_id"].nunique()
-
-    loss_projects = cost_df[cost_df["margin"] < 0]["project_id"].nunique()
-
-    util_kpi = round(((total_employees - underutilized) / total_employees) * 100, 1)
-    risk_kpi = round(((total_projects - risky_projects) / total_projects) * 100, 1)
-    margin_kpi = round(((total_projects - loss_projects) / total_projects) * 100, 1)
-
-    # -----------------------------
-    # KPI DISPLAY
-    # -----------------------------
-    st.subheader("📊 Executive KPIs")
-    c1, c2, c3 = st.columns(3)
-    c1.metric("Utilization Health %", f"{util_kpi}%")
-    c2.metric("Delivery Risk Health %", f"{risk_kpi}%")
-    c3.metric("Margin Health %", f"{margin_kpi}%")
-
-    st.divider()
-
-    # -----------------------------
-    # ROLE-BASED VIEWS
-    # -----------------------------
-    if role == "Delivery Head":
-        st.subheader("🚨 Delivery Risk Projects")
-        st.dataframe(result["risk_projects"], use_container_width=True)
-
-        st.subheader("📉 Underutilized Employees")
-        st.dataframe(result["low_util"], use_container_width=True)
-
-    elif role == "HR":
-        st.subheader("⚠️ HR Risk Employees")
-        st.dataframe(result["hr_risks"], use_container_width=True)
-
-    elif role == "Finance":
-        st.subheader("💰 Loss / Margin Risk Projects")
-        st.dataframe(result["loss_projects"], use_container_width=True)
-
-    # -----------------------------
-    # EXECUTIVE SUMMARY
-    # -----------------------------
-    st.subheader("🧠 Executive AI Summary")
-    st.success(explanation)
-
-    pdf_path = generate_pdf(
-        explanation,
-        {"util": util_kpi, "risk": risk_kpi, "margin": margin_kpi}
-    )
-
-    with open(pdf_path, "rb") as f:
-        st.download_button(
-            "📄 Download Executive PDF Report",
-            f,
-            file_name="Delivery_Intelligence_Report.pdf",
-            mime="application/pdf"
-        )
-
-# ===============================
-# CHATBOT
+# CHAT INPUT
 # ===============================
 st.markdown("---")
-st.subheader("🤖 Ask Delivery Intelligence Bot")
-
-question = st.text_input(
-    "Ask about teams, utilization, delivery risk, HR or margin"
+user_question = st.text_input(
+    "💬 Ask a question",
+    placeholder="e.g. Are there people likely to leave? If yes, list their name, employee id and team name"
 )
 
 if st.button("🧠 Get Answer"):
-    if question.strip():
-        st.success(
-            answer_question(
-                question,
+    if not user_question.strip():
+        st.warning("Please enter a question.")
+    else:
+        with st.spinner("Analyzing..."):
+            answer = answer_question(
+                user_question,
                 data,
                 util_df,
                 risk_df,
                 cost_df,
                 hr_df
             )
-        )
-    else:
-        st.warning("Please enter a question.")
+
+        # ===============================
+        # ✅ CORRECT RENDERING LOGIC
+        # ===============================
+        if isinstance(answer, pd.DataFrame):
+            st.subheader("📋 Result")
+            st.dataframe(answer, use_container_width=True)
+        else:
+            st.success(answer)
 
 # ===============================
 # FOOTER
 # ===============================
-st.markdown(
-    """
-    <hr>
-    <div style="text-align:center; color:gray; font-size:13px;">
-    © 2026 Compunnel Digital | Agentic AI – Delivery Intelligence Platform
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+st.markdown("---")
+st.caption("© 2026 Compunnel Digital | Agentic AI – Delivery Intelligence Platform")
