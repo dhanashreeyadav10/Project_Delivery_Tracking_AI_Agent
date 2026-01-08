@@ -272,18 +272,25 @@ if st.button("🚀 Run AI Analysis"):
             )
 
 # ===============================
-# CHATBOT
+#Chat Bot
 # ===============================
 st.markdown("---")
 st.subheader("🤖 Ask Delivery Intelligence Bot")
 
-question = st.text_input("Ask about utilization, delivery risk, HR or margin")
+question = st.text_input(
+    "Ask about utilization, delivery risk, HR or margin"
+)
 
 if st.button("🧠 Get Answer"):
-    answer = answer_question(
-        question, util_df, risk_df, cost_df, hr_df
-    )
-    st.success(answer)
+    if not question.strip():
+        st.warning("Please enter a question.")
+    else:
+        with st.spinner("Analyzing..."):
+            answer = answer_question(
+                question, util_df, risk_df, cost_df, hr_df
+            )
+        st.success(answer)
+
 
 # ===============================
 # FOOTER
@@ -297,5 +304,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
