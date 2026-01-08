@@ -81,7 +81,7 @@ st.divider()
 # ===============================
 # SIDEBAR
 # ===============================
-st.sidebar.image("assets/compunnel_logo.png", width=180)
+st.sidebar.image("compunnel_logo.jpg", width=180)
 st.sidebar.markdown("---")
 
 st.sidebar.header("📂 Upload Data")
@@ -297,4 +297,5 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
