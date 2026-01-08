@@ -1,81 +1,166 @@
 import pandas as pd
 from llm_groq import explain_insight
 
+STANDARD_MONTHLY_CAPACITY = 160
 
-def answer_question(question, util_df, risk_df, cost_df, hr_df):
-    """
-    Answers delivery intelligence questions.
 
-    Returns:
-    - pandas.DataFrame for list / factual questions
-    - str (LLM-generated) for executive / why / recommendation questions
-    """
+def is_tabular_request(q: str) -> bool:
+    keywords = [
+        "list", "name", "employee id", "employee_id",
+        "team", "table", "show who", "who are"
+    ]
+    return any(k in q for k in keywords)
 
-    if not question:
-        return "Please ask a valid question."
 
+def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
     q = question.lower().strip()
 
-    # --------------------------------------------------
-    # UTILIZATION / BENCH
-    # --------------------------------------------------
-    if any(k in q for k in ["underutilized", "bench", "utilization below"]):
-        df = util_df[util_df["utilization_pct"] < 60].copy()
+    # =========================================================
+    # 🔴 ATTRITION / LIKELY TO LEAVE (TOP PRIORITY)
+    # =========================================================
+    if any(k in q for k in [
+        "likely to leave", "attrition",
+        "resign", "quit", "leave the company"
+    ]):
+        risky = hr_df[hr_df["hr_risk"] == 1]
 
-        if df.empty:
-            return "No employees are currently underutilized."
+        if risky.empty:
+            return "No employees currently show strong attrition risk signals."
 
-        df = df.sort_values("utilization_pct")
-        return df.head(10)
+        # Build safe employee lookup
+        emp_lookup = (
+            data[["employee_id", "employee_name", "department"]]
+            .drop_duplicates()
+            .set_index("employee_id")
+        )
 
-    # --------------------------------------------------
-    # DELIVERY RISK / PROJECT HEALTH
-    # --------------------------------------------------
-    if any(k in q for k in ["delivery risk", "delay", "risky project"]):
-        df = risk_df[risk_df["risk_flag"] == 1].copy()
+        rows = []
+        for _, r in risky.iterrows():
+            emp_id = r["employee_id"]
+            if emp_id not in emp_lookup.index:
+                continue
 
-        if df.empty:
-            return "No projects are currently flagged as delivery risks."
+            emp = emp_lookup.loc[emp_id]
+            rows.append({
+                "Employee ID": emp_id,
+                "Employee Name": emp["employee_name"],
+                "Team": emp["department"],
+                "Avg Attendance (%)": round(r["avg_attendance"], 1),
+                "Performance Rating": round(r["avg_rating"], 1)
+            })
 
-        return df
+        df = pd.DataFrame(rows).head(10)
 
-    # --------------------------------------------------
-    # COST / MARGIN / FINANCIAL
-    # --------------------------------------------------
-    if any(k in q for k in ["loss", "margin", "financial", "profit"]):
-        df = cost_df[cost_df["margin"] < 0].copy()
+        # -------------------------------
+        # ✅ TABULAR OUTPUT (EXPLICIT LIST REQUEST)
+        # -------------------------------
+        if is_tabular_request(q):
+            return df
 
-        if df.empty:
-            return "All projects are currently financially healthy."
+        # -------------------------------
+        # 🧠 EXECUTIVE NARRATIVE (LLM)
+        # -------------------------------
+        prompt = f"""
+You are a Delivery Head reviewing people attrition risk.
 
-        return df
+Based on the following employee data:
+{df.to_dict(orient="records")}
 
-    # --------------------------------------------------
-    # HR / ATTRITION
-    # --------------------------------------------------
-    if any(k in q for k in ["hr risk", "attrition", "likely to leave", "leave company"]):
-        df = hr_df[hr_df["hr_risk"] == 1].copy()
+Provide:
+- High-level summary
+- Key reasons why these employees may leave
+- Leadership recommendations
 
-        if df.empty:
-            return "No employees currently show strong HR or attrition risk signals."
+Do NOT repeat the table.
+Keep it professional and executive-ready.
+"""
+        return explain_insight(prompt)
 
-        return df
+    # =========================================================
+    # 🔵 TEAM UTILIZATION
+    # =========================================================
+    if "team" in q and "utilization" in q:
+        team_util = (
+            data.groupby("department")
+            .agg(
+                total_hours=("hours_logged", "sum"),
+                employee_count=("employee_id", "nunique")
+            )
+            .reset_index()
+        )
 
-    # --------------------------------------------------
-    # EXECUTIVE / WHY / RECOMMENDATION (LLM)
-    # --------------------------------------------------
-    prompt = f"""
-    You are a senior enterprise delivery leader.
+        team_util["Utilization %"] = (
+            team_util["total_hours"] /
+            (team_util["employee_count"] * STANDARD_MONTHLY_CAPACITY)
+        ) * 100
 
-    Question:
-    {question}
+        team_util["Utilization %"] = team_util["Utilization %"].clip(upper=100)
+        low_teams = team_util.sort_values("Utilization %").head(5)
 
-    Provide:
-    - A clear and concise answer
-    - Business impact
-    - Actionable recommendations for leadership
+        if is_tabular_request(q):
+            return low_teams[["department", "Utilization %"]]
 
-    Keep the response professional and executive-friendly.
-    """
+        prompt = f"""
+You are a Delivery Head.
 
-    return explain_insight(prompt)
+Low utilization teams:
+{low_teams.to_dict(orient="records")}
+
+Explain:
+- Why utilization is low
+- Business impact
+- What actions leadership should take
+"""
+        return explain_insight(prompt)
+
+    # =========================================================
+    # 🔵 DELIVERY RISK
+    # =========================================================
+    if any(k in q for k in ["delivery risk", "delivery", "delay", "miss deadlines"]):
+        risky = risk_df[risk_df["risk_flag"] == 1].head(5)
+
+        if risky.empty:
+            return "No projects currently show strong delivery risk."
+
+        if is_tabular_request(q):
+            return risky[["project_id", "open_tickets", "high_priority"]]
+
+        prompt = f"""
+You are a Program Director.
+
+Risky projects:
+{risky.to_dict(orient="records")}
+
+Explain risks and immediate corrective actions.
+"""
+        return explain_insight(prompt)
+
+    # =========================================================
+    # 🔵 FINANCIAL / MARGIN
+    # =========================================================
+    if any(k in q for k in ["margin", "loss", "financial", "profit", "cost"]):
+        loss = cost_df[cost_df["margin"] < 0].head(5)
+
+        if loss.empty:
+            return "All projects are financially healthy."
+
+        if is_tabular_request(q):
+            return loss[["project_id", "margin", "cost_overrun"]]
+
+        prompt = f"""
+You are a Finance & Delivery leader.
+
+Loss-making projects:
+{loss.to_dict(orient="records")}
+
+Explain causes and corrective actions.
+"""
+        return explain_insight(prompt)
+
+    # =========================================================
+    # 🔵 FALLBACK
+    # =========================================================
+    return explain_insight(
+        "Answer the following delivery intelligence question professionally:\n"
+        + question
+    )
