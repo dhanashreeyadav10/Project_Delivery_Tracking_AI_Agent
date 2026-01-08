@@ -69,7 +69,7 @@ st.divider()
 # ===============================
 # SIDEBAR
 # ===============================
-st.sidebar.image("assets/compunnel_logo.png", width=180)
+# st.sidebar.image("assets/compunnel_logo.png", width=180)
 st.sidebar.markdown("---")
 
 uploaded_file = st.sidebar.file_uploader(
@@ -266,4 +266,5 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
