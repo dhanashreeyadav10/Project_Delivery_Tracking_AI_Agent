@@ -164,9 +164,9 @@ if st.button("Run AI Analysis"):
     st.subheader("⚠️ HR Risk Indicators")
     st.dataframe(result["hr_risks"], use_container_width=True)
 
-    if use_llm and result["explanation"]:
-        st.subheader("🧠 Executive AI Summary")
-        st.success(result["explanation"])
+    if result["explanation"]:
+        st.subheader("🧠 Executive Summary")
+        st.info(result["explanation"])
 
 # =========================================================
 # 🔹 PART 2: CONVERSATIONAL AI BOT
@@ -196,3 +196,4 @@ if st.button("Get Answer"):
             st.dataframe(response, use_container_width=True)
         else:
             st.success(response)
+
