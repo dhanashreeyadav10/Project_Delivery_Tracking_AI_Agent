@@ -23,7 +23,17 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("🧠 Agentic AI – Project & Delivery Intelligence")
+# ===============================
+# HEADER WITH LOGO
+# ===============================
+col1, col2 = st.columns([1, 6])
+
+with col1:
+    st.image("compunnel_logo.jpg", width=120)
+
+with col2:
+    st.title("🧠 Agentic AI – Project & Delivery Intelligence")
+    st.caption("Enterprise Project, Cost, Risk & HR Intelligence Platform")
 
 # ===============================
 # FILE UPLOAD
@@ -225,3 +235,4 @@ if st.button("🧠 Get Answer"):
                 hr_df
             )
         st.success(answer)
+
