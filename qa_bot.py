@@ -1,71 +1,3 @@
-# from llm_groq import explain_insight
-
-# def answer_question(question, util_df, risk_df, leakage_df):
-#     """
-#     Answers natural language questions based on delivery analytics.
-#     Uses uploaded data only.
-#     """
-
-#     q = question.lower()
-
-#     # -------------------------------
-#     # Intent Detection
-#     # -------------------------------
-#     if "underutil" in q or "low utilization" in q or "bench" in q:
-#         data = util_df[util_df["utilization"] < 0.6]
-#         summary = f"{len(data)} employees are underutilized."
-#         context = data.head(10).to_string(index=False)
-
-#     elif "risk" in q or "delay" in q:
-#         data = risk_df[risk_df["risk"] == 1]
-#         summary = f"{len(data)} projects are at risk of delay."
-#         context = data.to_string(index=False)
-
-#     elif "billing" in q or "leakage" in q or "revenue" in q:
-#         data = leakage_df
-#         summary = f"{len(data)} records indicate billing leakage."
-#         context = data.head(10).to_string(index=False)
-
-#     elif "summary" in q or "overview" in q or "health" in q:
-#         summary = "Overall project delivery health overview."
-#         context = f"""
-#         Underutilized Employees: {len(util_df[util_df['utilization'] < 0.6])}
-#         Risky Projects: {len(risk_df[risk_df['risk'] == 1])}
-#         Billing Leakage Records: {len(leakage_df)}
-#         """
-
-#     else:
-#         summary = "General delivery analytics insight."
-#         context = f"""
-#         Utilization rows: {len(util_df)}
-#         Risk rows: {len(risk_df)}
-#         Leakage rows: {len(leakage_df)}
-#         """
-
-#     # -------------------------------
-#     # LLM Prompt
-#     # -------------------------------
-#     prompt = f"""
-#     You are an enterprise Project & Delivery Analytics Advisor.
-
-#     User Question:
-#     {question}
-
-#     Key Findings:
-#     {summary}
-
-#     Data Context:
-#     {context}
-
-#     Provide:
-#     - Clear explanation
-#     - Business impact
-#     - Actionable recommendations
-#     """
-
-#     response = explain_insight(prompt)
-#     return response
-
 
 
 from llm_groq import explain_insight
@@ -109,3 +41,4 @@ def answer_question(question, util_df, risk_df, cost_df, hr_df):
     """
 
     return explain_insight(prompt)
+
