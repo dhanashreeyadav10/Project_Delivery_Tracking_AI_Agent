@@ -21,12 +21,12 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
             f"- Employees with HR risk signals: {len(hr_df[hr_df['hr_risk'] == 1])}\n\n"
             "What this tells me:\n"
             "- We have bench inefficiencies impacting cost.\n"
-            "- A small set of projects need immediate delivery attention.\n"
-            "- Financial and people risks are emerging but still manageable.\n\n"
+            "- A few projects need immediate delivery stabilization.\n"
+            "- Early people risks are visible but still manageable.\n\n"
             "What I would focus on immediately:\n"
             "- Rebalance utilization across projects.\n"
-            "- Stabilize high-risk deliveries.\n"
-            "- Address cost and HR risks early before escalation."
+            "- Contain delivery risk before it escalates.\n"
+            "- Address cost and HR risks early."
         )
 
     # =========================================================
@@ -44,20 +44,20 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
         response = (
             "TEAMS WITH LOW UTILIZATION\n\n"
             "Summary:\n"
-            "- The following teams are operating below expected utilization levels.\n\n"
+            "- These teams are operating below expected utilization levels.\n\n"
         )
 
         for _, r in low_teams.iterrows():
             response += (
                 f"{r['department']} Team\n"
                 "Why this is a concern:\n"
-                f"- Average utilization is around {r['utilization_pct']:.1f}%.\n"
-                "- Workload demand and staffing are misaligned.\n\n"
+                f"- Average utilization is {r['utilization_pct']:.1f}%.\n"
+                "- Demand and staffing are misaligned.\n\n"
                 "Why it matters:\n"
-                "- Prolonged low utilization increases bench cost and inefficiency.\n\n"
+                "- Sustained low utilization increases bench cost.\n\n"
                 "Recommended action:\n"
                 "- Reassign excess capacity to high-demand projects.\n"
-                "- Upskill team members for billable roles.\n\n"
+                "- Upskill team members for billable work.\n\n"
                 "--------------------------------------------\n\n"
             )
 
@@ -77,17 +77,16 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
         response = (
             "UNDERUTILIZED EMPLOYEES\n\n"
             "Summary:\n"
-            "- These employees are currently underutilized and may be on bench.\n\n"
+            "- These employees are currently underutilized.\n\n"
         )
 
         for _, r in low_emp.iterrows():
             response += (
                 f"Employee {r['employee_id']}\n"
                 "Why this is a concern:\n"
-                f"- Utilization is approximately {r['utilization_pct']:.1f}%.\n"
-                "- Limited billable allocation observed.\n\n"
+                f"- Utilization is {r['utilization_pct']:.1f}%.\n\n"
                 "Why it matters:\n"
-                "- Sustained underutilization leads to cost leakage.\n\n"
+                "- Prolonged bench time leads to cost leakage.\n\n"
                 "Recommended action:\n"
                 "- Assign to active or upcoming projects.\n"
                 "- Ensure ownership of billable deliverables.\n\n"
@@ -112,10 +111,7 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
             .reset_index()
         )
         proj["avg_util"] = proj["total_hours"] / proj["employee_count"]
-        overstaffed = proj[
-            (proj["employee_count"] >= 5) &
-            (proj["avg_util"] < 100)
-        ]
+        overstaffed = proj[(proj["employee_count"] >= 5) & (proj["avg_util"] < 100)]
 
         if overstaffed.empty:
             return "At this point, I don’t see any projects that are clearly overstaffed."
@@ -123,7 +119,7 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
         response = (
             "OVERSTAFFED PROJECTS\n\n"
             "Summary:\n"
-            "- The following projects appear to have more capacity than required.\n\n"
+            "- These projects have more capacity than required.\n\n"
         )
 
         for _, r in overstaffed.iterrows():
@@ -133,10 +129,10 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
                 f"- {r['employee_count']} resources assigned.\n"
                 "- Average utilization per resource is low.\n\n"
                 "Why it matters:\n"
-                "- Overstaffing directly impacts margins and portfolio efficiency.\n\n"
+                "- Overstaffing directly impacts margins.\n\n"
                 "Recommended action:\n"
                 "- Reduce team size.\n"
-                "- Reassign excess resources to high-demand projects.\n\n"
+                "- Redeploy excess resources.\n\n"
                 "--------------------------------------------\n\n"
             )
 
@@ -154,7 +150,7 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
         response = (
             "PROJECTS AT DELIVERY RISK\n\n"
             "Summary:\n"
-            "- These projects show elevated delivery risk indicators.\n\n"
+            "- These projects show elevated delivery risk.\n\n"
         )
 
         for _, r in risky.iterrows():
@@ -162,13 +158,13 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
                 f"Project {r['project_id']}\n"
                 "Why this is a concern:\n"
                 f"- {r['open_tickets']} open Jira tickets.\n"
-                f"- {r['high_priority']} high-priority issues unresolved.\n\n"
+                f"- {r['high_priority']} high-priority issues.\n\n"
                 "Why it matters:\n"
-                "- High-priority backlog often results in schedule slippage.\n\n"
+                "- High-priority backlog typically leads to schedule slippage.\n\n"
                 "Recommended action:\n"
                 "- Freeze low-value scope.\n"
                 "- Prioritize critical tickets.\n"
-                "- Add senior resources until stability improves.\n\n"
+                "- Add senior resources temporarily.\n\n"
                 "--------------------------------------------\n\n"
             )
 
@@ -187,28 +183,28 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
         response = (
             "PROJECTS NEEDING FINANCIAL REVIEW\n\n"
             "Summary:\n"
-            "- These projects are showing margin or cost risk.\n\n"
+            "- These projects show margin or cost risk.\n\n"
         )
 
         for _, r in loss.iterrows():
             response += (
                 f"Project {r['project_id']}\n"
                 "Why this is a concern:\n"
-                f"- Project is running at a negative margin ({int(r['margin'])}).\n"
-                f"- Cost overrun observed: {'Yes' if r['cost_overrun'] else 'No'}.\n\n"
+                f"- Negative margin ({int(r['margin'])}).\n"
+                f"- Cost overrun: {'Yes' if r['cost_overrun'] else 'No'}.\n\n"
                 "Why it matters:\n"
-                "- Continued margin erosion impacts overall portfolio profitability.\n\n"
+                "- Continued erosion impacts portfolio profitability.\n\n"
                 "Recommended action:\n"
                 "- Review pricing and billing mix.\n"
-                "- Control non-billable effort.\n"
-                "- Rebalance team structure if needed.\n\n"
+                "- Reduce non-billable effort.\n"
+                "- Rebalance team structure.\n\n"
                 "--------------------------------------------\n\n"
             )
 
         return response.strip()
 
     # =========================================================
-    # 7️⃣ HR / ATTRITION RISK (PROFESSIONAL FORMAT)
+    # 7️⃣ HR / ATTRITION RISK (CUSTOMIZED PER EMPLOYEE)
     # =========================================================
     if any(k in q for k in [
         "hr", "attendance", "attrition",
@@ -222,23 +218,63 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
         response = (
             "EMPLOYEES WITH HR RISK INDICATORS\n\n"
             "Summary:\n"
-            "- The following employees are showing early HR risk signals.\n"
-            "- Primary drivers include attendance inconsistency and performance trends.\n\n"
+            "- These employees show people-risk signals based on attendance and performance trends.\n\n"
         )
 
         for _, r in hr_risk.iterrows():
+            attendance = r["avg_attendance"]
+            rating = r["avg_rating"]
+
+            if attendance < 85 and rating < 3.5:
+                why_matters = (
+                    "This combination indicates disengagement and a high probability of attrition "
+                    "if not addressed promptly."
+                )
+                recommendation = (
+                    "- Immediate manager-led intervention.\n"
+                    "- HRBP involvement for retention planning.\n"
+                    "- Review role fit, workload, and growth path."
+                )
+
+            elif attendance < 85 and rating >= 3.5:
+                why_matters = (
+                    "Performance remains strong, but attendance patterns suggest burnout or "
+                    "personal constraints rather than disengagement."
+                )
+                recommendation = (
+                    "- Manager check-in focused on well-being.\n"
+                    "- Adjust workload or provide flexibility.\n"
+                    "- Monitor attendance trend before escalation."
+                )
+
+            elif attendance >= 85 and rating < 3.5:
+                why_matters = (
+                    "Attendance is stable, but performance trends suggest skill gaps or role misalignment."
+                )
+                recommendation = (
+                    "- Targeted coaching or training.\n"
+                    "- Clarify role expectations.\n"
+                    "- Set short-term improvement goals."
+                )
+
+            else:
+                why_matters = (
+                    "Signals are mild but worth monitoring to prevent future disengagement."
+                )
+                recommendation = (
+                    "- Light-touch manager conversation.\n"
+                    "- Continue regular performance check-ins."
+                )
+
             response += (
                 f"Employee {r['employee_id']}\n"
                 "Why this is a concern:\n"
-                f"- Attendance is trending below expectations ({r['avg_attendance']:.1f}%).\n"
-                f"- Performance rating indicates potential disengagement ({r['avg_rating']:.1f}).\n\n"
+                f"- Attendance average: {attendance:.1f}%.\n"
+                f"- Performance rating: {rating:.1f}.\n\n"
                 "Why it matters:\n"
-                "- Unaddressed people risks often lead to attrition or productivity drops.\n"
-                "- This can disrupt delivery continuity and team morale.\n\n"
+                f"- {why_matters}\n\n"
                 "Recommended action:\n"
-                "- Manager-led discussion to understand concerns.\n"
-                "- Clarify role expectations and growth path.\n"
-                "- Monitor engagement over the next review cycle.\n\n"
+                f"{recommendation}\n\n"
                 "--------------------------------------------\n\n"
             )
 
@@ -249,10 +285,6 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
     # =========================================================
     llm_answer = explain_insight(question)
     return llm_answer or (
-        "I can help with:\n"
-        "- Utilization and bench analysis\n"
-        "- Overstaffed or delivery-risk projects\n"
-        "- Financial and margin risks\n"
-        "- HR and attrition indicators\n"
-        "- Executive delivery summaries"
+        "I can help with utilization, delivery risk, financial health, "
+        "overstaffing, HR risk, and executive delivery summaries."
     )
