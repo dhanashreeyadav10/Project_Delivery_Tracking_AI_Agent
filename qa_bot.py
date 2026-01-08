@@ -2,40 +2,71 @@ import pandas as pd
 from llm_groq import explain_insight
 
 
-STANDARD_MONTHLY_CAPACITY = 160  # hours per employee
-
-
 def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
     q = question.lower()
 
     # =========================================================
-    # 1️⃣ EXECUTIVE / OVERALL DELIVERY HEALTH
+    # 🔴 PRIORITY 1: ATTRITION / LIKELY TO LEAVE (OVERRIDE)
     # =========================================================
     if any(k in q for k in [
-        "overall", "summary", "health",
-        "leadership", "key insights", "major risks"
+        "likely to leave", "attrition", "people leave",
+        "resign", "quit", "leave the company"
     ]):
-        return (
-            "OVERALL DELIVERY HEALTH SUMMARY\n\n"
-            "Summary:\n"
-            f"- Underutilized employees (<60%): {len(util_df[util_df['utilization_pct'] < 60])}\n"
-            f"- Projects at delivery risk: {len(risk_df[risk_df['risk_flag'] == 1])}\n"
-            f"- Projects with financial risk: {len(cost_df[cost_df['margin'] < 0])}\n"
-            f"- Employees with HR risk signals: {len(hr_df[hr_df['hr_risk'] == 1])}\n\n"
-            "What this tells me:\n"
-            "- There is bench inefficiency impacting cost.\n"
-            "- A subset of projects need delivery stabilization.\n"
-            "- People risks are emerging but still actionable.\n\n"
-            "Immediate focus:\n"
-            "- Rebalance utilization.\n"
-            "- Stabilize risky projects.\n"
-            "- Address HR and financial risks early."
+        risky = hr_df[hr_df["hr_risk"] == 1]
+
+        if risky.empty:
+            return "At this time, I do not see any employees showing strong attrition risk signals."
+
+        # enrich with employee name & team
+        emp_map = (
+            data[["employee_id", "employee_name", "department"]]
+            .drop_duplicates()
+            .set_index("employee_id")
         )
 
+        rows = []
+        for _, r in risky.iterrows():
+            emp = emp_map.loc.get(r["employee_id"])
+            if emp is not None:
+                rows.append({
+                    "employee_id": r["employee_id"],
+                    "employee_name": emp["employee_name"],
+                    "team": emp["department"],
+                    "attendance": r["avg_attendance"],
+                    "rating": r["avg_rating"]
+                })
+
+        df = pd.DataFrame(rows).head(5)
+
+        # build factual context for LLM
+        context = df.to_dict(orient="records")
+
+        prompt = f"""
+You are a Delivery Head reviewing people risk.
+
+From the following data, identify employees likely to leave.
+Explain in a professional, leadership tone.
+
+Data:
+{context}
+
+Provide:
+- Employee Name
+- Employee ID
+- Team
+- Clear reason for attrition risk
+- Leadership recommendation
+
+Do NOT mention data sources or models.
+Keep it executive-ready.
+"""
+
+        return explain_insight(prompt)
+
     # =========================================================
-    # 2️⃣ TEAM / DEPARTMENT UTILIZATION (FIXED LOGIC)
+    # 🔵 TEAM UTILIZATION (ONLY IF TEAM QUESTION)
     # =========================================================
-    if "team" in q or "department" in q:
+    if "team" in q and "utilization" in q:
         team_util = (
             data.groupby("department")
             .agg(
@@ -46,238 +77,68 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
         )
 
         team_util["utilization_pct"] = (
-            team_util["total_hours"] /
-            (team_util["employee_count"] * STANDARD_MONTHLY_CAPACITY)
+            team_util["total_hours"] / (team_util["employee_count"] * 160)
         ) * 100
 
-        team_util["utilization_pct"] = team_util["utilization_pct"].clip(upper=100)
         low_teams = team_util.sort_values("utilization_pct").head(3)
 
-        response = (
-            "TEAMS WITH LOW UTILIZATION\n\n"
-            "Summary:\n"
-            "- These teams are operating below optimal utilization levels.\n\n"
-        )
+        prompt = f"""
+You are a Delivery Head.
 
-        for _, r in low_teams.iterrows():
-            response += (
-                f"{r['department']} Team\n"
-                "Why this is a concern:\n"
-                f"- Average utilization is {r['utilization_pct']:.1f}%.\n"
-                "- Available capacity is not fully leveraged.\n\n"
-                "Why it matters:\n"
-                "- Sustained low utilization increases bench cost.\n\n"
-                "Recommended action:\n"
-                "- Reassign excess capacity to high-demand projects.\n"
-                "- Upskill team members for billable roles.\n\n"
-                "--------------------------------------------\n\n"
-            )
+These teams have low utilization:
+{low_teams.to_dict(orient="records")}
 
-        return response.strip()
+Explain:
+- What this means
+- Why it matters
+- What leadership should do next
+"""
+
+        return explain_insight(prompt)
 
     # =========================================================
-    # 3️⃣ EMPLOYEE UTILIZATION / BENCH
+    # 🔵 DELIVERY RISK
     # =========================================================
-    if any(k in q for k in [
-        "utilization", "bench", "underutilized",
-        "not fully utilized"
-    ]):
-        low_emp = util_df[util_df["utilization_pct"] < 60] \
-            .sort_values("utilization_pct") \
-            .head(5)
+    if "delivery" in q or "risk" in q:
+        risky = risk_df[risk_df["risk_flag"] == 1].head(5)
 
-        response = (
-            "UNDERUTILIZED EMPLOYEES\n\n"
-            "Summary:\n"
-            "- These employees are currently underutilized.\n\n"
-        )
+        prompt = f"""
+You are a Program Director reviewing delivery health.
 
-        for _, r in low_emp.iterrows():
-            response += (
-                f"Employee {r['employee_id']}\n"
-                "Why this is a concern:\n"
-                f"- Utilization is {r['utilization_pct']:.1f}%.\n\n"
-                "Why it matters:\n"
-                "- Extended bench time directly impacts delivery cost efficiency.\n\n"
-                "Recommended action:\n"
-                "- Assign to active or upcoming work.\n"
-                "- Ensure ownership of billable deliverables.\n\n"
-                "--------------------------------------------\n\n"
-            )
+Risky projects:
+{risky.to_dict(orient="records")}
 
-        return response.strip()
+Explain:
+- Why these projects are at risk
+- Impact on delivery timelines
+- Immediate corrective actions
+"""
+
+        return explain_insight(prompt)
 
     # =========================================================
-    # 4️⃣ OVERSTAFFED PROJECTS
+    # 🔵 FINANCIAL / MARGIN
     # =========================================================
-    if any(k in q for k in [
-        "overstaffed", "too many people",
-        "over staffed", "staffed heavily"
-    ]):
-        proj = (
-            data.groupby("project_id")
-            .agg(
-                employee_count=("employee_id", "nunique"),
-                total_hours=("hours_logged", "sum")
-            )
-            .reset_index()
-        )
+    if any(k in q for k in ["margin", "loss", "financial", "profit"]):
+        loss = cost_df[cost_df["margin"] < 0].head(5)
 
-        proj["avg_util"] = (
-            proj["total_hours"] /
-            (proj["employee_count"] * STANDARD_MONTHLY_CAPACITY)
-        ) * 100
+        prompt = f"""
+You are a Finance + Delivery leader.
 
-        overstaffed = proj[
-            (proj["employee_count"] >= 5) &
-            (proj["avg_util"] < 60)
-        ]
+Loss-making projects:
+{loss.to_dict(orient="records")}
 
-        if overstaffed.empty:
-            return "At this point, I don’t see any projects that are clearly overstaffed."
+Explain:
+- Why margins are negative
+- Business risk
+- What should be done immediately
+"""
 
-        response = (
-            "OVERSTAFFED PROJECTS\n\n"
-            "Summary:\n"
-            "- These projects appear to have excess capacity.\n\n"
-        )
-
-        for _, r in overstaffed.iterrows():
-            response += (
-                f"Project {r['project_id']}\n"
-                "Why this is a concern:\n"
-                f"- Team utilization is only {r['avg_util']:.1f}%.\n"
-                f"- {r['employee_count']} resources assigned.\n\n"
-                "Why it matters:\n"
-                "- Overstaffing reduces margins and portfolio efficiency.\n\n"
-                "Recommended action:\n"
-                "- Reduce team size.\n"
-                "- Redeploy excess resources.\n\n"
-                "--------------------------------------------\n\n"
-            )
-
-        return response.strip()
+        return explain_insight(prompt)
 
     # =========================================================
-    # 5️⃣ DELIVERY RISK / PROJECT HEALTH
+    # 🔵 FALLBACK
     # =========================================================
-    if any(k in q for k in [
-        "delivery risk", "risk", "delay",
-        "delivery problems", "miss deadlines"
-    ]):
-        risky = risk_df[risk_df["risk_flag"] == 1].head(3)
-
-        response = (
-            "PROJECTS AT DELIVERY RISK\n\n"
-            "Summary:\n"
-            "- These projects show elevated delivery risk indicators.\n\n"
-        )
-
-        for _, r in risky.iterrows():
-            response += (
-                f"Project {r['project_id']}\n"
-                "Why this is a concern:\n"
-                f"- {r['open_tickets']} open Jira tickets.\n"
-                f"- {r['high_priority']} high-priority issues.\n\n"
-                "Why it matters:\n"
-                "- High-priority backlog often leads to schedule slippage.\n\n"
-                "Recommended action:\n"
-                "- Prioritize critical tickets.\n"
-                "- Add senior resources temporarily.\n\n"
-                "--------------------------------------------\n\n"
-            )
-
-        return response.strip()
-
-    # =========================================================
-    # 6️⃣ FINANCIAL / MARGIN RISK
-    # =========================================================
-    if any(k in q for k in [
-        "cost", "margin", "loss", "financial",
-        "budget", "profit", "financial review"
-    ]):
-        loss = cost_df[cost_df["margin"] < 0].head(3)
-
-        response = (
-            "PROJECTS NEEDING FINANCIAL REVIEW\n\n"
-            "Summary:\n"
-            "- These projects are running at financial risk.\n\n"
-        )
-
-        for _, r in loss.iterrows():
-            response += (
-                f"Project {r['project_id']}\n"
-                "Why this is a concern:\n"
-                f"- Negative margin of {int(r['margin'])}.\n\n"
-                "Why it matters:\n"
-                "- Continued losses impact portfolio profitability.\n\n"
-                "Recommended action:\n"
-                "- Review pricing and billing mix.\n"
-                "- Reduce non-billable effort.\n\n"
-                "--------------------------------------------\n\n"
-            )
-
-        return response.strip()
-
-    # =========================================================
-    # 7️⃣ HR / ATTRITION RISK (CUSTOMIZED)
-    # =========================================================
-    if any(k in q for k in [
-        "hr", "attendance", "attrition",
-        "people", "performance", "leave"
-    ]):
-        hr_risk = hr_df[hr_df["hr_risk"] == 1].head(3)
-
-        if hr_risk.empty:
-            return "At this point, I do not see any employees with significant HR risk signals."
-
-        response = (
-            "EMPLOYEES WITH HR RISK INDICATORS\n\n"
-            "Summary:\n"
-            "- The following employees show early people-risk signals.\n\n"
-        )
-
-        for _, r in hr_risk.iterrows():
-            attendance = r["avg_attendance"]
-            rating = r["avg_rating"]
-
-            if attendance < 85 and rating < 3.5:
-                why = "High attrition risk due to disengagement."
-                action = (
-                    "- Immediate manager + HRBP intervention.\n"
-                    "- Role and growth-path reassessment."
-                )
-            elif attendance < 85:
-                why = "Potential burnout or personal constraints."
-                action = (
-                    "- Workload adjustment.\n"
-                    "- Flexible scheduling."
-                )
-            else:
-                why = "Skill or role misalignment risk."
-                action = (
-                    "- Targeted coaching.\n"
-                    "- Short-term performance goals."
-                )
-
-            response += (
-                f"Employee {r['employee_id']}\n"
-                f"- Attendance: {attendance:.1f}%\n"
-                f"- Performance rating: {rating:.1f}\n\n"
-                "Why it matters:\n"
-                f"- {why}\n\n"
-                "Recommended action:\n"
-                f"{action}\n\n"
-                "--------------------------------------------\n\n"
-            )
-
-        return response.strip()
-
-    # =========================================================
-    # 8️⃣ FALLBACK
-    # =========================================================
-    llm_answer = explain_insight(question)
-    return llm_answer or (
-        "I can help with utilization, delivery risk, financial health, "
-        "overstaffing, HR risk, and executive delivery summaries."
+    return explain_insight(
+        "Answer the following delivery intelligence question professionally:\n" + question
     )
