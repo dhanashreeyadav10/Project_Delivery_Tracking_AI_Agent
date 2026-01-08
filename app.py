@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import io
 from PIL import Image
+import os
+st.write("GROQ key loaded:", bool(os.getenv("GROQ_API_KEY")))
+
 
 from models import (
     utilization_model,
@@ -150,4 +153,5 @@ if st.button("🧠 Get Answer"):
             question, util_df, risk_df, cost_df, hr_df
         )
     st.success(response)
+
 
