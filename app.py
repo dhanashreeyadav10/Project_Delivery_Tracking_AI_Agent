@@ -50,10 +50,10 @@ st.markdown(
 
 col1, col2 = st.columns([1, 7])
 
-with col1:
-    st.image("compunnel_logo.jpg", width=140)
+# with col1:
+    # st.image("compunnel_logo.jpg", width=140)
 
-with col2:
+with col1:
     st.markdown(
         """
         <div class="header-title">Agentic AI – Project & Delivery Intelligence</div>
@@ -69,7 +69,7 @@ st.divider()
 # ===============================
 # SIDEBAR
 # ===============================
-# st.sidebar.image("assets/compunnel_logo.png", width=180)
+st.sidebar.image("compunnel_logo.jpg", width=180)
 st.sidebar.markdown("---")
 
 uploaded_file = st.sidebar.file_uploader(
@@ -266,5 +266,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
