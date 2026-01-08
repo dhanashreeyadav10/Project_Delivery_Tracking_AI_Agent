@@ -35,8 +35,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 c1, c2 = st.columns([1, 7])
-with c1:
-    # st.image("assets/compunnel_logo.png", width=140)
+# with c1:
+#     # st.image("assets/compunnel_logo.png", width=140)
 with c2:
     st.markdown("""
     <div class="header-title">Agentic AI – Project & Delivery Intelligence</div>
@@ -240,3 +240,4 @@ st.markdown("""
 © 2026 Compunnel Digital | Agentic AI – Delivery Intelligence Platform
 </div>
 """, unsafe_allow_html=True)
+
