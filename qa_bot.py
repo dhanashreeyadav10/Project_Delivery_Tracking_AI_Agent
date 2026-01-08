@@ -12,16 +12,21 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
         "leadership", "major risks", "health"
     ]):
         return (
-            f"Overall Delivery Health Summary:\n\n"
-            f"- Underutilized Employees: {len(util_df[util_df['utilization_pct'] < 60])}\n"
-            f"- Delivery Risk Projects: {len(risk_df[risk_df['risk_flag'] == 1])}\n"
-            f"- Loss-Making Projects: {len(cost_df[cost_df['margin'] < 0])}\n"
-            f"- HR Risk Employees: {len(hr_df[hr_df['hr_risk'] == 1])}\n\n"
-            "Leadership Focus Areas:\n"
-            "- Improve bench utilization\n"
-            "- Mitigate delivery risks\n"
-            "- Address margin leakage\n"
-            "- Engage HR on risk signals"
+            "OVERALL DELIVERY HEALTH SUMMARY\n\n"
+            f"Underutilized Employees: {len(util_df[util_df['utilization_pct'] < 60])}\n"
+            f"Delivery Risk Projects: {len(risk_df[risk_df['risk_flag'] == 1])}\n"
+            f"Loss-Making Projects: {len(cost_df[cost_df['margin'] < 0])}\n"
+            f"HR Risk Employees: {len(hr_df[hr_df['hr_risk'] == 1])}\n\n"
+            "WHY:\n"
+            "- Bench utilization inefficiencies\n"
+            "- High-priority unresolved Jira tickets\n"
+            "- Cost overruns and pricing gaps\n"
+            "- Attendance and performance dips\n\n"
+            "RECOMMENDATIONS:\n"
+            "- Reallocate underutilized resources\n"
+            "- Fast-track critical delivery issues\n"
+            "- Review pricing and cost controls\n"
+            "- Proactively engage HR on risk signals"
         )
 
     # =========================================================
@@ -37,9 +42,17 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
 
         low_teams = team_util.sort_values("utilization_pct").head(5)
 
-        response = "Teams with Low Utilization:\n\n"
+        response = "TEAMS WITH LOW UTILIZATION\n\n"
         for _, r in low_teams.iterrows():
-            response += f"- {r['department']} | {r['utilization_pct']:.1f}% utilization\n"
+            response += (
+                f"{r['department']}\n"
+                f"WHY:\n"
+                f"- Average utilization is only {r['utilization_pct']:.1f}%\n"
+                f"- Low billable workload\n\n"
+                f"RECOMMENDATION:\n"
+                f"- Reassign resources to high-demand projects\n"
+                f"- Upskill team for billable roles\n\n"
+            )
 
         return response
 
@@ -50,14 +63,19 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
         "utilization", "bench", "underutilized",
         "under utilized", "not fully utilized"
     ]):
-        low_emp = util_df[util_df["utilization_pct"] < 60]
+        low_emp = util_df[util_df["utilization_pct"] < 60].sort_values("utilization_pct").head(5)
 
-        if low_emp.empty:
-            return "No underutilized employees found."
-
-        response = "Underutilized Employees (Top 10):\n\n"
-        for _, r in low_emp.sort_values("utilization_pct").head(10).iterrows():
-            response += f"- {r['employee_id']} | {r['utilization_pct']:.1f}% utilization\n"
+        response = "UNDERUTILIZED EMPLOYEES\n\n"
+        for _, r in low_emp.iterrows():
+            response += (
+                f"Employee {r['employee_id']}\n"
+                f"WHY:\n"
+                f"- Utilization is only {r['utilization_pct']:.1f}%\n"
+                f"- Limited billable task allocation\n\n"
+                f"RECOMMENDATION:\n"
+                f"- Allocate to active projects\n"
+                f"- Assign billable responsibilities\n\n"
+            )
 
         return response
 
@@ -84,15 +102,16 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
             (proj_util["avg_utilization"] < 100)
         ]
 
-        if overstaffed.empty:
-            return "No overstaffed projects identified."
-
-        response = "Overstaffed Projects (Low Utilization):\n\n"
+        response = "OVERSTAFFED PROJECTS\n\n"
         for _, r in overstaffed.iterrows():
             response += (
-                f"- Project {r['project_id']} | "
-                f"Employees: {r['employee_count']} | "
-                f"Avg Utilization: {r['avg_utilization']:.1f}\n"
+                f"Project {r['project_id']}\n"
+                f"WHY:\n"
+                f"- {r['employee_count']} employees assigned\n"
+                f"- Average utilization per employee is low ({r['avg_utilization']:.1f})\n\n"
+                f"RECOMMENDATION:\n"
+                f"- Reduce team size\n"
+                f"- Reassign excess resources\n\n"
             )
 
         return response
@@ -106,15 +125,16 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
     ]):
         risky = risk_df[risk_df["risk_flag"] == 1]
 
-        if risky.empty:
-            return "No delivery risk projects identified."
-
-        response = "Projects at Delivery Risk:\n\n"
+        response = "PROJECTS AT DELIVERY RISK\n\n"
         for _, r in risky.iterrows():
             response += (
-                f"- Project {r['project_id']} | "
-                f"Open Tickets: {r['open_tickets']} | "
-                f"High Priority: {r['high_priority']}\n"
+                f"Project {r['project_id']}\n"
+                f"WHY:\n"
+                f"- {r['open_tickets']} open Jira tickets\n"
+                f"- {r['high_priority']} high-priority issues\n\n"
+                f"RECOMMENDATION:\n"
+                f"- Prioritize critical tickets\n"
+                f"- Add experienced resources\n\n"
             )
 
         return response
@@ -129,15 +149,17 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
     ]):
         loss = cost_df[cost_df["margin"] < 0]
 
-        if loss.empty:
-            return "No projects currently require financial review."
-
-        response = "Projects Needing Financial Review:\n\n"
+        response = "PROJECTS NEEDING FINANCIAL REVIEW\n\n"
         for _, r in loss.iterrows():
             response += (
-                f"- Project {r['project_id']} | "
-                f"Margin: {int(r['margin'])} | "
-                f"Cost Overrun: {'Yes' if r['cost_overrun'] else 'No'}\n"
+                f"Project {r['project_id']}\n"
+                f"WHY:\n"
+                f"- Negative margin ({int(r['margin'])})\n"
+                f"- Cost overrun: {'Yes' if r['cost_overrun'] else 'No'}\n\n"
+                f"RECOMMENDATION:\n"
+                f"- Review billing rates\n"
+                f"- Control delivery costs\n"
+                f"- Improve billable utilization\n\n"
             )
 
         return response
@@ -151,21 +173,22 @@ def answer_question(question, data, util_df, risk_df, cost_df, hr_df):
     ]):
         hr_risk = hr_df[hr_df["hr_risk"] == 1]
 
-        if hr_risk.empty:
-            return "No HR risk employees identified."
-
-        response = "Employees with HR Risk Indicators:\n\n"
+        response = "EMPLOYEES WITH HR RISK\n\n"
         for _, r in hr_risk.iterrows():
             response += (
-                f"- {r['employee_id']} | "
-                f"Attendance: {r['avg_attendance']:.1f}% | "
-                f"Rating: {r['avg_rating']:.1f}\n"
+                f"Employee {r['employee_id']}\n"
+                f"WHY:\n"
+                f"- Attendance below threshold ({r['avg_attendance']:.1f}%)\n"
+                f"- Performance rating is low ({r['avg_rating']:.1f})\n\n"
+                f"RECOMMENDATION:\n"
+                f"- Manager intervention\n"
+                f"- Career or role discussion\n\n"
             )
 
         return response
 
     # =========================================================
-    # 8️⃣ FALLBACK (OPTIONAL LLM)
+    # 8️⃣ FALLBACK
     # =========================================================
     llm_answer = explain_insight(question)
     return llm_answer or (
